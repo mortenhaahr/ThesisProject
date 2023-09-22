@@ -1,0 +1,71 @@
+
+Digital twin:
+    Physical entities:
+    Data ingestion and processing:
+    Asset Management and models:
+    Service Management:
+    Twin Management and configuration:
+    User Interaction and Control:
+
+
+Digital twin:
+    Data ingestion:
+        Through Grafana.
+
+    Data processing:
+        Multiple possibilities.
+        Some filtering for noise probably.
+        Maybe some derivatives of pressure, ... .
+
+    Services:
+        How much pressure in the internal tank?
+        Leak or no leak?
+        Water usage or not?
+        How much water usage?
+        Low flow mode?
+
+        Potentially different classifiers.
+            Which Applience is being used?
+
+
+    Monitors:
+        Pressure in internal tank:
+            Check if pressure inside internal tank is too low.
+            If it is too low then send msg to technisian.
+
+        Leakage detection:
+            Check if the system thinks that there is a leak.
+            If there is a presumed leak, then ask the user if they are using water.
+                If the user is using water, this was a false positive and the model needs to be updated.
+                If water is not being used, then a leak was detected and something should be done.
+
+        Performance monitor:
+            How much power is needed to provide the given flow and pressure?
+
+    Predictive maintenance:
+        When do we expect the internal tank to be empty?
+
+        Check of pump performance:
+            Check if the energy needed to provide a given pressure and flow has increased. If it is increased and the internal tank is at a reasonable level, then it might be the impeller that is damaged.
+
+    Visualisation:
+        Grafana
+
+    Calibration:
+        No feedback model:
+            Capture sensor data over a time period.
+            Use this as the calibration of the model.
+            No feedback from the user to any given predicted leakage.
+
+        Feedback model:
+            Default configuration.
+            When a leak is detected - notify the user and ask if water is being used. Use the answer to recalibrate the model in real time.
+
+
+    Configuration:
+        Sensitivity to leakages
+
+        Lower bound for pressure in internal tank
+
+
+

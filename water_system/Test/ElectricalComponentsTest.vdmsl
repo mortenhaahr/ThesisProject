@@ -1,0 +1,57 @@
+values
+    g1 : Graph = mk_Graph(mk_VoltageSource(5, "V1"), {
+        mk_Graph(mk_Resistor(5, "R1"), 
+            {mk_Graph(mk_Resistor(10, "R2"),
+                {
+                    mk_Graph(mk_Resistor(10, "R3"), Ground)
+                })}
+        )
+    });
+
+values
+    -- Needed due to bug with traces meaning we need to save function in value
+    graph_is_nil = is_nil[Graph];
+    graph_not_nil = is_not_nil[Graph];
+    graph_equals = equals[[Graph]];
+
+traces
+find_neg :
+    let g = g1 in
+        graph_is_nil(find(g, "V2"))
+
+find_pos :
+    let g = g1 in
+        let res = find(g, "R1") in
+            let expected_res in set g.nodes in -- First child
+            (
+                graph_not_nil(res);
+                graph_equals(res, expected_res);
+            );
+
+parent_not_exist :
+    graph_is_nil(parent(g1, "Unknown"));
+
+parent_root_node :
+    graph_is_nil(parent(g1, "V1"))
+
+parent_pos :
+    let g = g1 in
+    (
+        let res1 = parent(g, "R1") in
+        (
+            graph_not_nil(res1);
+            graph_equals(res1, g);
+        );
+        let res2 = parent(g, "R2"), 
+            expected_res = find(g, "R1") in
+        (
+            graph_not_nil(res2);
+            graph_equals(res2, expected_res);
+        );
+        let res3 = parent(g, "R3"), 
+            expected_res = find(g, "R2") in
+        (
+            graph_not_nil(res3);
+            graph_equals(res3, expected_res);
+        );
+    );

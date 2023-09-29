@@ -1,0 +1,92 @@
+types
+    Ground_T = <Ground>;
+
+    Resistor :: value : real
+                name : seq of char;
+
+    Capacity :: value : real
+                name : seq of char;
+
+    Inductor :: value : real
+                name : seq of char;
+
+    VoltageSource :: value : real
+                     name : seq of char;
+
+    CurrentSource :: value : real
+                     name : seq of char;
+
+    Component = Resistor | Capacity | Inductor | VoltageSource | CurrentSource;
+
+    -- Graph structure to indicate a circuit
+    Graph :: val : Component
+             nodes : set1 of Graph | Ground_T;
+    -- TODO: Invariant with every Graph trace must end with leaf
+    -- (Note this is actually indirectly checked by type system)
+    -- TODO: Invariant ensuring name is unique
+
+    ------------------------------------------
+    ------------------------------------------
+    ------------------------------------------
+    -- BIG TODO: The structure of the graph is wrong
+    -- It would be better with something like:
+    -- Graph {
+    --  Nodes = set of nodes -- all our nodes
+    --  l_edges = set of edges -- edges on one terminal (non-directed yet)
+    --  r_edges = set of edges -- edges on other terminal (non-directed yet)
+    --  if card edges > 1 we have parallel coupling else serial
+    -- }
+    ------------------------------------------
+    ------------------------------------------
+    ------------------------------------------
+
+values
+    Ground = <Ground>
+
+functions
+    has_name: Graph * seq of char +> bool
+    has_name(graph, name) ==
+        graph.val.name = name;
+
+    find: Graph * seq of char +> [Graph]
+    find(graph, name) ==
+        cases has_name(graph, name):
+            false -> (
+                if graph.nodes = Ground then
+                    nil
+                else
+                    let res2 = {find(n, name) | n in set graph.nodes} in
+                        if res2 = {nil}
+                            then nil
+                        else
+                            let v in set res2 \ {nil} in
+                                v
+            ),
+            true -> graph
+        end;
+
+    -- Finds the parent of `child_name` inside `graph`.
+    parent: Graph * seq of char +> [Graph]
+    parent(graph, child_name) ==
+        if graph.nodes = Ground then
+            nil
+        else
+            if exists c in set graph.nodes & has_name(c, child_name) then
+                graph
+            else
+                let res = {parent(g, child_name) | g in set graph.nodes} in
+                    if res = {nil}
+                        then nil
+                    else
+                        let p in set res be st p <> nil in
+                            p;
+
+                -- forall p in graph.nodes : parent(c, child_name));
+                -- iota c in set graph.nodes & parent(c, child_name) <> nil;
+
+
+                
+
+    get_voltage: Graph * seq of char * seq of char +> real
+    get_voltage(c, n1, n2) ==
+        is not yet specified;

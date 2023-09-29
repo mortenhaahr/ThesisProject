@@ -1,0 +1,12 @@
+functions
+is_not_nil[@T] : [@T] +> [@T]
+is_not_nil(g) == g
+post g <> nil;
+
+is_nil[@T] : [@T] +> [@T]
+is_nil(g) == g
+post g = nil;
+
+equals[@T] : @T * @T +> bool
+equals(t1, t2) == true
+post t1 = t2;

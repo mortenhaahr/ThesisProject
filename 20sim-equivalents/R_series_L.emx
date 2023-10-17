@@ -1,0 +1,1291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document>
+ <Model version="5.0" build="5.0.3.12565">
+  <Sidops><![CDATA[model 128 184
+ description '<Information>
+  <Description>
+    <Version>5.0</Version>
+    <IsMainModel>0</IsMainModel>
+    <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>C:\Users\User\Desktop\20sim-equivalents\R_series_L.emx</LibraryPath>
+    <TimeStamp>2023-10-17 04:32:31</TimeStamp>
+  </Description>
+</Information>';
+ type Mainmodel
+ end;
+ implementation bg
+  submodels
+   Damper 160 48
+    description '<Description>
+ <Version>4.0</Version>
+ <IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Mechanical\Translation\Components\Damper.emx</LibraryPath>
+  <TimeStamp>2007-11-15 15:48:2</TimeStamp>
+</Description>';
+    type Damper
+     ports
+      translation delta in p;
+    end;
+    icon ipm bottom
+     figures
+      line 162.7 48 184 48 color 0;
+      line 136 48 157.3 48 color 0;
+      line 162.7 39.5 162.7 56.5 color 0;
+      line 152 39.5 162.7 39.5 color 0;
+      line 152 56.5 162.7 56.5 color 0;
+      line 157.3 42.7 157.3 53.3 color 0;
+      rectangle 136 32 184 64 color -1;
+     terminals
+      p high 136 48 fixed;
+      p low 184 48 fixed;
+    end;
+    implementation eq
+parameters
+	real d = 1.0 {N.s/m};		// damping
+equations
+	p.F = d * p.v;
+   implementation_end;
+   Damper1 568 48
+    description '<Description>
+ <Version>4.0</Version>
+ <IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Mechanical\Translation\Components\Damper.emx</LibraryPath>
+  <TimeStamp>2007-11-15 15:48:2</TimeStamp>
+</Description>';
+    type Damper
+     ports
+      translation delta in p;
+    end;
+    icon ipm bottom
+     figures
+      line 570.7 48 592 48 color 0;
+      line 544 48 565.3 48 color 0;
+      line 570.7 39.5 570.7 56.5 color 0;
+      line 560 39.5 570.7 39.5 color 0;
+      line 560 56.5 570.7 56.5 color 0;
+      line 565.3 42.7 565.3 53.3 color 0;
+      rectangle 544 32 592 64 color -1;
+     terminals
+      p high 544 48 fixed;
+      p low 592 48 fixed;
+    end;
+    implementation eq
+parameters
+	real d = 1.0 {N.s/m};		// damping
+equations
+	p.F = d * p.v;
+   implementation_end;
+   FixedWorld 88 48
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Mechanical\Translation\Components\FixedWorld.emx</LibraryPath>
+  <TimeStamp>2007-9-26 10:35:34</TimeStamp>
+</Description>';
+    type FixedWorld
+     ports
+      translation psi duplicatable in p;
+     restrictions
+      causality fixed in p;
+    end;
+    icon ipm bottom
+     figures
+      line 80.7 35.4 80.7 59.3 color 0 width 2;
+      line 80.7 35.4 87.3 41.3 color 0;
+      line 80.7 41.3 87.3 47.5 color 0;
+      line 80.7 47.5 87.3 53.4 color 0;
+      line 80.7 53.4 87.3 59.3 color 0;
+      rectangle 78 30 98 66 color -1;
+     terminals
+      p 98 48;
+      p 98 48;
+    end;
+    implementation eq
+equations
+	p.v = 0;
+ implementation_end;
+   FixedWorld1 744 48
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Mechanical\Translation\Components\FixedWorld.emx</LibraryPath>
+  <TimeStamp>2007-9-26 10:35:34</TimeStamp>
+</Description>';
+    type FixedWorld
+     ports
+      translation psi duplicatable in p;
+     restrictions
+      causality fixed in p;
+    end;
+    icon ipm bottom
+     figures
+      line 750.6 36.1 750.6 58.7 color 0 width 2;
+      line 750.6 36.1 744.6 41.7 color 0;
+      line 750.6 41.7 744.6 47.5 color 0;
+      line 750.6 47.5 744.6 53.1 color 0;
+      line 750.6 53.1 744.6 58.7 color 0;
+      rectangle 735 31 753 65 color -1;
+     terminals
+      p 735 48;
+      p 735 48;
+    end;
+    implementation eq
+equations
+	p.v = 0;
+ implementation_end;
+   Force 327.2 50.1
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Mechanical\Translation\Actuators\Force.emx</LibraryPath>
+  <TimeStamp>2007-10-23 22:45:0</TimeStamp>
+</Description>';
+    type Force
+     ports
+      translation psi out p;
+     restrictions
+      causality fixed out p;
+    end;
+    icon ipm bottom
+     figures
+      line 317.8 48 304 48 color 0 end;
+      text 'F' 323.2 48 color 0 14;
+      line 344.5 37.3 344.5 64 color 0 width 2;
+      line 350.4 35.2 344.5 40.5 color 0 fill 2005303;
+      line 350.4 40.5 344.5 45.9 color 0 fill 2005303;
+      line 350.4 45.9 344.5 51.2 color 0 fill 2005303;
+      line 350.4 51.2 344.5 56.5 color 0 fill 2005303;
+      line 350.4 56.5 344.5 61.9 color 0 fill 2005303;
+      line 331.7 48 343.4 48 color 0 end;
+     terminals
+      p 302.4 48 fixed;
+    end;
+    implementation eq
+parameters
+	real F = 1.0 {N};		// force
+variables
+	real hidden v {m/s};
+equations
+	p.F = F; 
+	v = p.v;implementation_end;
+   Force1 487.2 50.1
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Mechanical\Translation\Actuators\Force.emx</LibraryPath>
+  <TimeStamp>2007-10-23 22:45:0</TimeStamp>
+</Description>';
+    type Force
+     ports
+      translation psi out p;
+     restrictions
+      causality fixed out p;
+    end;
+    icon ipm bottom
+     figures
+      line 496.6 48 510.4 48 color 0 end;
+      text 'F' 491.2 48 color 0 14;
+      line 469.9 37.3 469.9 64 color 0 width 2;
+      line 464 35.2 469.9 40.5 color 0 fill 2005303;
+      line 464 40.5 469.9 45.9 color 0 fill 2005303;
+      line 464 45.9 469.9 51.2 color 0 fill 2005303;
+      line 464 51.2 469.9 56.5 color 0 fill 2005303;
+      line 464 56.5 469.9 61.9 color 0 fill 2005303;
+      line 482.7 48 471 48 color 0 end;
+     terminals
+      p 512 48 fixed;
+    end;
+    implementation eq
+parameters
+	real F = 1.0 {N};		// force
+variables
+	real hidden v {m/s};
+equations
+	p.F = F; 
+	v = p.v;implementation_end;
+   Ground 168 320
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Ground.emx</LibraryPath>
+  <TimeStamp>2007-9-25 11:57:33</TimeStamp>
+</Description>';
+    type Ground
+     ports
+      electric psi duplicatable in p;
+     restrictions
+      causality fixed out p;
+    end;
+    icon ipm bottom
+     figures
+      line 160 320 176 320 color 0;
+      line 162.7 324.3 173.3 324.3 color 0;
+      line 165.3 328 170.7 328 color 0;
+      line 168 312 168 320 color 0;
+     terminals
+      p 168 312 fixed;
+      p 168 312 fixed;
+      p 168 312 fixed;
+    end;
+    implementation eq
+equations
+	p.u = 0;
+ implementation_end;
+   HydroInertia 704 304
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Iconic Diagrams\Electric\Components\Inductor.emx</LibraryPath><TimeStamp>2007-9-25 11:57:43</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate></Description></Information>';
+    type Inductor
+     ports
+      hydraulic delta in p;
+     restrictions
+      causality preferred in p;
+    end;
+    icon ipm ellipse bottom
+     figures
+      ellipse 698.1 296 710.9 311.5 color 0;
+      ellipse 710.9 296 723.7 311.5 color 0;
+      ellipse 685.3 296 698.1 311.5 color 0;
+      rectangle 685.3 305.1 723.7 312 color 16777215 fill 16777215;
+      line 680 304 685.3 304 color 0;
+      line 722.7 304 728 304 color 0;
+     terminals
+      p high 680 304 fixed;
+      p low 728 304 fixed;
+    end;
+    implementation eq
+parameters
+	real I = 1.0  {Pa.s2/m3};			// inductance
+equations
+	p.p = I * ddt(p.phi);
+    implementation_end;
+   HydroResistor 600 304
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Iconic Diagrams\Electric\Components\Resistor.emx</LibraryPath><TimeStamp>2007-9-25 11:58:20</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate></Description></Information>';
+    type Resistor
+     ports
+      hydraulic delta in p;
+    end;
+    icon ipm bottom
+     figures
+      line 576 304 624 304 color 0;
+      rectangle 584 292 616 316 color 0 fill 16777215;
+     terminals
+      p high 576 304 fixed;
+      p low 624 304 fixed;
+    end;
+    implementation eq
+parameters
+	real r = 1.0 {Pa.s/m3};		// Pascal-second per cubic meter
+equations
+	p.p = r * p.phi;implementation_end;
+   I 272 424
+    description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\I.emx</LibraryPath>
+  <TimeStamp>2011-11-29 15:55:55</TimeStamp>
+</Description>
+</Information>';
+    type I
+     ports
+      power in p;
+      signal out state;
+     restrictions
+      causality preferred in p;
+    end;
+    icon bg ellipse bottom
+     figures
+      text 'I' 272 424 color 0 18 bold;
+    end;
+    implementation eq
+parameters
+	real i = 1;
+equations
+    state = int(p.e);
+    p.f = state / i;
+implementation_end;
+   Inductor 208 200
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Inductor.emx</LibraryPath>
+  <TimeStamp>2007-9-25 11:57:43</TimeStamp>
+</Description>';
+    type Inductor
+     ports
+      electric delta in p;
+     restrictions
+      causality preferred in p;
+    end;
+    icon ipm ellipse bottom
+     figures
+      ellipse 202.1 192 214.9 207.5 color 0;
+      ellipse 214.9 192 227.7 207.5 color 0;
+      ellipse 189.3 192 202.1 207.5 color 0;
+      rectangle 189.3 201.1 227.7 208 color 16777215 fill 16777215;
+      line 184 200 189.3 200 color 0;
+      line 226.7 200 232 200 color 0;
+     terminals
+      p high 184 200 fixed;
+      p low 232 200 fixed;
+    end;
+    implementation eq
+parameters
+	real L = 1.0  {H};			// inductance
+equations
+	p.u = L * ddt(p.i);
+    implementation_end;
+   Mass 248 48
+			specifications active 'Default'
+				specification 'Default'
+ description '<Information>
+ <Description>
+    <LibraryPath>Iconic Diagrams\Mechanical\Translation\Components\Mass.emx</LibraryPath>
+  <TimeStamp>2014-1-7 11:38:57</TimeStamp>
+  <Version>4.5</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+  <AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <Configuration>
+   <struct>
+    <member>
+     <name>DocumentationMask</name>
+     <value>
+     <struct/>     </value>
+    </member>
+   </struct>
+  </Configuration>
+ </Description>
+</Information>';
+ type Mass
+  ports
+   translation psi duplicatable in p;
+  restrictions
+   causality preferred in p;
+ end;
+ icon ipm bottom
+  figures
+   rectangle 232 32 264 64 color 0 fill 13421772;
+   text 'm' 248 48 color 0 15 italic;
+  terminals
+   p 232 48;
+   p 248 48;
+   p 248 48;
+   p 264 48;
+ end;
+ implementation eq
+parameters
+	real m = 1.0 {kg};		// mass
+variables
+	real interesting x {m};
+	real a {m/s2};
+equations
+	a = p.F / m;
+	p.v = int (a);
+	x = int (p.v);
+implementation_end;
+specification_end;
+				specification 'Gravity'
+description '<Information>
+ <Description>
+    <Version>4.3</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Iconic Diagrams\Mechanical\Translation\Components\Mass.emx</LibraryPath>
+  <TimeStamp>2013-4-18 16:28:16</TimeStamp>
+</Description>
+</Information>';
+ type Mass
+  ports
+   translation psi duplicatable in p;
+  restrictions
+   causality preferred in p;
+ end;
+ icon ipm bottom
+  figures
+   rectangle 424 192 456 224 fill 13421772;
+   text 'm' 440 208 15 italic;
+   line 429 221 429 205 429 221 start;
+   text 'Fg' 430 199 11 italic;
+  terminals
+   p 440 208;
+   p 440 192;
+ end;
+ implementation eq
+parameters
+	real m = 1.0 {kg};			// mass
+	real g = 9.800665 {m/s2};	// acceleration of gravity
+variables
+	real interesting x {m};
+	real a {m/s2};
+equations
+	a = (p.F / m) - g;
+	p.v = int (a);
+	x = int (p.v);
+
+implementation_end;
+specification_end;
+			end;
+   Mass1 656 48
+			specifications active 'Default'
+				specification 'Default'
+ description '<Information>
+ <Description>
+    <LibraryPath>Iconic Diagrams\Mechanical\Translation\Components\Mass.emx</LibraryPath>
+  <TimeStamp>2014-1-7 11:38:57</TimeStamp>
+  <Version>4.5</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+  <AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <Configuration>
+   <struct>
+    <member>
+     <name>DocumentationMask</name>
+     <value>
+     <struct/>     </value>
+    </member>
+   </struct>
+  </Configuration>
+ </Description>
+</Information>';
+ type Mass
+  ports
+   translation psi duplicatable in p;
+  restrictions
+   causality preferred in p;
+ end;
+ icon ipm bottom
+  figures
+   rectangle 640 32 672 64 color 0 fill 13421772;
+   text 'm' 656 48 color 0 15 italic;
+  terminals
+   p 640 48;
+   p 640 48;
+   p 672 48;
+ end;
+ implementation eq
+parameters
+	real m = 1.0 {kg};		// mass
+variables
+	real interesting x {m};
+	real a {m/s2};
+equations
+	a = p.F / m;
+	p.v = int (a);
+	x = int (p.v);
+implementation_end;
+specification_end;
+				specification 'Gravity'
+description '<Information>
+ <Description>
+    <Version>4.3</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Iconic Diagrams\Mechanical\Translation\Components\Mass.emx</LibraryPath>
+  <TimeStamp>2013-4-18 16:28:16</TimeStamp>
+</Description>
+</Information>';
+ type Mass
+  ports
+   translation psi duplicatable in p;
+  restrictions
+   causality preferred in p;
+ end;
+ icon ipm bottom
+  figures
+   rectangle 424 192 456 224 fill 13421772;
+   text 'm' 440 208 15 italic;
+   line 429 221 429 205 429 221 start;
+   text 'Fg' 430 199 11 italic;
+  terminals
+   p 440 208;
+   p 440 192;
+ end;
+ implementation eq
+parameters
+	real m = 1.0 {kg};			// mass
+	real g = 9.800665 {m/s2};	// acceleration of gravity
+variables
+	real interesting x {m};
+	real a {m/s2};
+equations
+	a = (p.F / m) - g;
+	p.v = int (a);
+	x = int (p.v);
+
+implementation_end;
+specification_end;
+			end;
+   Node1 167.9 295.9
+    description '<Description><Version>4.0</Version>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Node.emx</LibraryPath>
+  <TimeStamp>2007-10-31 11:27:14</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+    knot Node
+     ports
+      electric knot psi duplicatable none p [1];
+    end;
+    icon bg ellipse
+     figures
+      ellipse 164.8 292.8 171.2 299.2 color -1 fill 0;
+      ellipse 163.7 291.7 172.2 300.2 color -1;
+     terminals
+      p 168 296 fixed;
+      p 168 296 fixed;
+      p 168 296 fixed;
+      p 168 296 fixed;
+    end;
+    implementation eq
+equations
+	sum (direct (p.t)) = 0;
+	equal (collect (p.a));
+  implementation_end;
+   OneJunction 184 400
+    description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\OneJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:17:51</TimeStamp>
+</Description>
+</Information>';
+    knot OneJunction
+     ports
+      power knot duplicatable none p [1];
+      signal knot out flow [1];
+     restrictions
+      causality constraint one_out p;
+    end;
+    icon bg ellipse
+     figures
+      text '1' 184 400 color 0 18 bold;
+    end;
+    implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+   PressureSource 500 308.5
+    description '<Information><Description><Version>4.9</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Iconic Diagrams\20-sim Lib\Hydraulics\Pumps\Basic Pumps\PressureSource.emx</LibraryPath><TimeStamp>2021-9-1 15:50:41</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><ModelVersion><MajorVersion>2</MajorVersion><MinorVersion>0</MinorVersion><PatchVersion>0</PatchVersion></ModelVersion><Description>Revision History
+1.0.0 first version, works with general fluid properties model
+2.0.0 parameter ranges added</Description><Author>C. Kleijn</Author><Company>Controllab Products B.V.</Company></Description></Information>';
+    type PressureSource
+     ports
+      hydraulic psi out p;
+     restrictions
+      causality fixed out p;
+    end;
+    icon ipm bottom
+     figures
+      line 472 320 472 304 536 304 color 0;
+      ellipse 488 288 520 320 color 0 fill 16777215;
+      line 464 320 464 328 480 328 480 320 color 0;
+      text 'p' 503 301.4 color 16711680 14;
+      line 518.8 303.3 510.8 299.2 510.8 307.2 518.8 303.3 color 0 fill 0;
+     terminals
+      p 536 304 fixed;
+    end;
+    implementation eq
+parameters
+	real p = 1 {Pa};	// pressure
+equations
+	p.p = p;
+
+implementation_end;
+   R 272 360
+    description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\R.emx</LibraryPath><TimeStamp>2011-11-29 16:35:37</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate></Description></Information>';
+    type R
+     ports
+      power in p;
+    end;
+    icon bg ellipse bottom
+     figures
+      text 'R' 272 360 color 0 18 bold;
+    end;
+    implementation eq
+parameters
+	real r = 1.0;
+equations
+	p.e = r * p.f;
+implementation_end;
+   Resistor 104 200
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Resistor.emx</LibraryPath>
+  <TimeStamp>2007-9-25 11:58:20</TimeStamp>
+</Description>';
+    type Resistor
+     ports
+      electric delta in p;
+    end;
+    icon ipm bottom
+     figures
+      line 80 200 128 200 color 0;
+      rectangle 88 188 120 212 color 0 fill 16777215;
+     terminals
+      p high 80 200 fixed;
+      p low 128 200 fixed;
+    end;
+    implementation eq
+parameters
+	real R = 1.0 {ohm};		// resistance
+equations
+	p.u = R * p.i;
+      implementation_end;
+   Se 88 400
+    description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\Se.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:36:49</TimeStamp>
+</Description>
+</Information>';
+    type Se
+     ports
+      power out p;
+     restrictions
+      causality fixed out p;
+    end;
+    icon bg ellipse bottom
+     figures
+      text 'Se' 88 400 color 0 18 bold;
+    end;
+    implementation eq
+parameters
+	real effort = 1;
+variables
+	real flow;
+equations
+	p.e = effort;
+	flow = p.f;
+implementation_end;
+   TankRef 784 320
+    description '<Information><Description><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><AllowLibraryUpdate>True</AllowLibraryUpdate><ModelVersion><MajorVersion>2</MajorVersion><MinorVersion>0</MinorVersion><PatchVersion>0</PatchVersion></ModelVersion><Description>1.0.0: First version, also works with general fluid properties model
+2.0.0: p_preload renamced to p_tank, range added
+          renamed from TankNoRes to Tank</Description><Author>C. Klejin</Author><Company>Controllab Products B.V.</Company><LibraryPath>Iconic Diagrams\Hydraulics\Volumes\Tank.emx</LibraryPath><TimeStamp>2021-12-15 10:44:46</TimeStamp><Version>4.9</Version></Description></Information>';
+    type Tank
+     ports
+      hydraulic psi in p;
+     restrictions
+      causality fixed out p;
+    end;
+    icon ipm bottom
+     figures
+      line 776 328 776 336 792 336 792 328 color 0;
+      line 784 328 784 304 color 0;
+     terminals
+      p 784 304 fixed;
+    end;
+    implementation eq
+parameters
+	real p_preload = 0 {Pa};	// tank pressure
+equations
+	p.p = p_preload;implementation_end;
+   VoltageSource 39.9 248
+			specifications active 'DC'
+				specification 'AC'
+description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+	   <LibraryPath>Iconic Diagrams\Electric\Sources\VoltageSource.emx</LibraryPath>
+	  <TimeStamp>2008-1-24 10:10:10</TimeStamp>
+</Description>';
+ type VoltageSource
+  ports
+   electric delta out p;
+  restrictions
+   causality fixed out p;
+ end;
+ icon bg bottom
+  figures
+   group
+    line 192 147 192 155;
+    line 188 151 196 151;
+   end;
+   line 200 144 200 192;
+   ellipse 188.9 157.3 211.3 179.7 fill 16777215;
+   spline 192.1 167.8 197.4 162.2 202.7 173.2 207.9 167.8;
+  terminals
+   p high 200 144 fixed;
+   p low 200 192 fixed;
+ end;
+ implementation eq
+parameters
+	real U = 220 {V};		// voltage
+	real f = 50 {Hz};			// frequency
+variables
+	real hidden current {A};
+equations
+	p.u = U * sin ( 2 * pi * f * time );
+   	current = p.i;implementation_end;
+specification_end;
+				specification 'DC'
+ description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Electric\Sources\VoltageSource.emx</LibraryPath>
+  <TimeStamp>2008-1-24 10:10:10</TimeStamp>
+</Description>';
+ type VoltageSource
+  ports
+   electric delta out p;
+  restrictions
+   causality fixed out p;
+ end;
+ icon bg bottom
+  figures
+   line 40 224 40 272 color 0;
+   ellipse 29.3 237.3 51.7 259.7 color 0 fill 16777215;
+   line 29.2 230.4 36.7 230.4 color 0;
+   line 32.4 227.2 32.4 234.7 color 0;
+  terminals
+   p high 40 224 fixed;
+   p low 40 272 fixed;
+ end;
+ implementation eq
+parameters
+	real U = 1 {V};		// voltage
+variables
+	real hidden current {A};
+equations
+	p.u = U;
+	current = p.i;             implementation_end;
+specification_end;
+			end;
+  end;
+  connections
+   Damper\p_low => Mass\p;
+   Damper1\p_low => Mass1\p;
+   FixedWorld\p => Damper\p_high;
+   FixedWorld1\p => Mass1\p;
+   Force\p => Mass\p;
+   Force1\p => Damper1\p_high;
+   Ground\p => Node1\p;
+   HydroInertia\p_low => TankRef\p;
+   HydroResistor\p_low => HydroInertia\p_high;
+   Inductor\p_low => Node1\p 288 200 288 296;
+   OneJunction\p => I\p;
+   OneJunction\p => R\p;
+   PressureSource\p => HydroResistor\p_high;
+   Resistor\p_low => Inductor\p_high;
+   Se\p => OneJunction\p;
+   VoltageSource\p_high => Resistor\p_high 40 200;
+   VoltageSource\p_low <= Node1\p 40 296;
+  end;
+  figures
+   text '!=' 408 56 color 0 50;
+ implementation_end;
+]]></Sidops>
+ </Model>
+ <Experiments>
+  <DefaultExperiment><![CDATA[Experiment 1]]></DefaultExperiment>
+<Experiment>
+   <Name>Experiment 1</Name>
+   <CreatedBy></CreatedBy>
+   <Info></Info>
+<ExpData>
+ <VersionNumber>5.0</VersionNumber>
+ <ModelProperties>
+ </ModelProperties>
+ <Variables>
+  <Parameters>
+  </Parameters>
+  <Initials>
+   <Variable>
+    <Name>Mass\p.v_initial</Name>
+    <Unit>m/s</Unit>
+    <Value>0.0</Value>
+   </Variable>
+   <Variable>
+    <Name>HydroInertia\p.phi_initial</Name>
+    <Unit>m3/s</Unit>
+    <Value>0.0</Value>
+   </Variable>
+   <Variable>
+    <Name>I\state_initial</Name>
+    <Value>0.0</Value>
+   </Variable>
+   <Variable>
+    <Name>Inductor\p.i_initial</Name>
+    <Unit>A</Unit>
+    <Value>0.0</Value>
+   </Variable>
+   <Variable>
+    <Name>Mass\x_initial</Name>
+    <Unit>m</Unit>
+    <Value>0.0</Value>
+   </Variable>
+   <Variable>
+    <Name>Mass1\x_initial</Name>
+    <Unit>m</Unit>
+    <Value>0.0</Value>
+   </Variable>
+  </Initials>
+ </Variables>
+ <PlotSpecs>
+  <VarNames>
+   <VarName>time</VarName>
+   <VarName>HydroInertia\p.phi</VarName>
+   <VarName>Inductor\p.u</VarName>
+   <VarName>Inductor\p.i</VarName>
+   <VarName>Mass\p.v</VarName>
+   <VarName>Mass\p.F</VarName>
+   <VarName>HydroInertia\p.p</VarName>
+   <VarName>I\p.f</VarName>
+   <VarName>I\p.e</VarName>
+  </VarNames>
+  <Plots>
+   <Plot>
+    <PlotType>GraphPlot</PlotType>
+    <BasePlot>
+     <PlotId>1</PlotId>
+     <UseWindowsBGColor>false</UseWindowsBGColor>
+     <BGColor>16777215</BGColor>
+     <PlotIsVisible>true</PlotIsVisible>
+     <Solo>false</Solo>
+    </BasePlot>
+    <Grid>
+     <DrawGrid>true</DrawGrid>
+     <GridColor>15780518</GridColor>
+     <GridBorderLineColor>12624260</GridBorderLineColor>
+     <GridZeroLineColor>0</GridZeroLineColor>
+     <XTicks>10</XTicks>
+     <YTicks>10</YTicks>
+     <ZTicks>10</ZTicks>
+     <Use3DLook>false</Use3DLook>
+    </Grid>
+    <PlotBGColor>16777215</PlotBGColor>
+    <ShowPlotTitle>true</ShowPlotTitle>
+    <TitlePosition>1</TitlePosition>
+    <PlotTitle>model</PlotTitle>
+    <ShowXValues>true</ShowXValues>
+    <Fonts>
+     <TitleFont>
+      <Name>Arial</Name>
+      <Height>12</Height>
+      <PitchFamily>34</PitchFamily>
+      <Weight>400</Weight>
+      <Italic>0</Italic>
+      <UnderLine>0</UnderLine>
+      <StrikeOut>0</StrikeOut>
+      <Color>0</Color>
+     </TitleFont>
+     <LabelFont>
+      <Name>Arial</Name>
+      <Height>12</Height>
+      <PitchFamily>34</PitchFamily>
+      <Weight>400</Weight>
+      <Italic>0</Italic>
+      <UnderLine>0</UnderLine>
+      <StrikeOut>0</StrikeOut>
+      <Color>0</Color>
+     </LabelFont>
+     <ValuesFont>
+      <Name>Arial</Name>
+      <Height>10</Height>
+      <PitchFamily>34</PitchFamily>
+      <Weight>400</Weight>
+      <Italic>0</Italic>
+      <UnderLine>0</UnderLine>
+      <StrikeOut>0</StrikeOut>
+      <Color>0</Color>
+     </ValuesFont>
+     <LegendFont>
+      <Name>Arial</Name>
+      <Height>12</Height>
+      <PitchFamily>34</PitchFamily>
+      <Weight>400</Weight>
+      <Italic>0</Italic>
+      <UnderLine>0</UnderLine>
+      <StrikeOut>0</StrikeOut>
+      <Color>0</Color>
+     </LegendFont>
+    </Fonts>
+    <SharedXAxis>true</SharedXAxis>
+    <SharedYAxis>true</SharedYAxis>
+    <SharedZAxis>false</SharedZAxis>
+    <XAxes>
+     <Axis>
+      <Minimum>0.0</Minimum>
+      <Maximum>10.0</Maximum>
+      <Linear>true</Linear>
+      <Scaling>3</Scaling>
+      <Label>time</Label>
+     </Axis>
+    </XAxes>
+    <YAxes>
+     <Axis>
+      <Minimum>-0.4000000000000001</Minimum>
+      <Maximum>1.5999999999999999</Maximum>
+      <Linear>true</Linear>
+      <Scaling>1</Scaling>
+      <Label>HydroInertia p</Label>
+     </Axis>
+     <Axis>
+      <Minimum>0.0</Minimum>
+      <Maximum>10.0</Maximum>
+      <Linear>true</Linear>
+      <Scaling>1</Scaling>
+      <Label>HydroInertia phi</Label>
+     </Axis>
+     <Axis>
+      <Minimum>0.0</Minimum>
+      <Maximum>10.0</Maximum>
+      <Linear>true</Linear>
+      <Scaling>1</Scaling>
+      <Label>Inductor u</Label>
+     </Axis>
+     <Axis>
+      <Minimum>0.0</Minimum>
+      <Maximum>10.0</Maximum>
+      <Linear>true</Linear>
+      <Scaling>1</Scaling>
+      <Label>Inductor i</Label>
+     </Axis>
+     <Axis>
+      <Minimum>0.0</Minimum>
+      <Maximum>10.0</Maximum>
+      <Linear>true</Linear>
+      <Scaling>1</Scaling>
+      <Label>Mass F</Label>
+     </Axis>
+     <Axis>
+      <Minimum>0.0</Minimum>
+      <Maximum>10.0</Maximum>
+      <Linear>true</Linear>
+      <Scaling>1</Scaling>
+      <Label>Mass v</Label>
+     </Axis>
+     <Axis>
+      <Minimum>0.0</Minimum>
+      <Maximum>10.0</Maximum>
+      <Linear>true</Linear>
+      <Scaling>1</Scaling>
+      <Label>I f</Label>
+     </Axis>
+     <Axis>
+      <Minimum>0.0</Minimum>
+      <Maximum>10.0</Maximum>
+      <Linear>true</Linear>
+      <Scaling>1</Scaling>
+      <Label>I e</Label>
+     </Axis>
+    </YAxes>
+    <ZAxes>
+    </ZAxes>
+    <Curves>
+     <Curve>
+      <LineColor>3355111</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>3355111</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>true</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>HydroInertia\p.p</VarName>
+      </YCurveData>
+     </Curve>
+     <Curve>
+      <LineColor>6076255</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>6076255</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>true</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>HydroInertia\p.phi</VarName>
+      </YCurveData>
+     </Curve>
+     <Curve>
+      <LineColor>12553035</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>12553035</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>true</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>Inductor\p.u</VarName>
+      </YCurveData>
+     </Curve>
+     <Curve>
+      <LineColor>15086320</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>15086320</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>true</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>Inductor\p.i</VarName>
+      </YCurveData>
+     </Curve>
+     <Curve>
+      <LineColor>15790150</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>15790150</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>true</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>Mass\p.F</VarName>
+      </YCurveData>
+     </Curve>
+     <Curve>
+      <LineColor>1696255</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>1696255</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>true</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>Mass\p.v</VarName>
+      </YCurveData>
+     </Curve>
+     <Curve>
+      <LineColor>4089775</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>4089775</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>true</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>I\p.f</VarName>
+      </YCurveData>
+     </Curve>
+     <Curve>
+      <LineColor>10724259</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>10724259</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>true</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>I\p.e</VarName>
+      </YCurveData>
+     </Curve>
+    </Curves>
+    <Legenda>
+     <ShowLegenda>true</ShowLegenda>
+     <BorderPenColor>0</BorderPenColor>
+     <BackgroundColor>16777215</BackgroundColor>
+    </Legenda>
+   </Plot>
+  </Plots>
+  <PlotPanels>
+   <PlotPanel>
+    <PlotPanelId>1</PlotPanelId>
+    <PlotPanelVisible>true</PlotPanelVisible>
+    <Name>Window 1</Name>
+    <Tiling>0</Tiling>
+    <PlotIds>
+     <PlotId>1</PlotId>
+    </PlotIds>
+    <ToggleState>Base</ToggleState>
+   </PlotPanel>
+  </PlotPanels>
+ </PlotSpecs>
+ <RunSpecs>
+  <SimulatorSettings>
+   <StartTime>0.0</StartTime>
+   <FinishTime>10.0</FinishTime>
+   <AllowPassFinishTime>false</AllowPassFinishTime>
+   <Warp>false</Warp>
+   <SimulationMode>0</SimulationMode>
+   <FPGonio>false</FPGonio>
+   <UseOutputAfterEach>false</UseOutputAfterEach>
+   <OutputAfterEach>0.1</OutputAfterEach>
+   <EventEpsilon>1.0e-6</EventEpsilon>
+   <AlgebraicTolerance>1.0e-7</AlgebraicTolerance>
+   <SteadyStateAnalysis>false</SteadyStateAnalysis>
+   <UpdateHoldInstructions>true</UpdateHoldInstructions>
+  </SimulatorSettings>
+  <IntegrationMethods>
+   <IntegrationMethod>
+    <Name>Euler</Name>
+    <StepSize>0.01</StepSize>
+    <AutoStepSize>false</AutoStepSize>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>BackwardEuler</Name>
+    <AbsoluteTolerance>1.0e-5</AbsoluteTolerance>
+    <RelativeTolerance>1.0e-5</RelativeTolerance>
+    <AlgebraicAbsoluteTolerance>1.0e-5</AlgebraicAbsoluteTolerance>
+    <AlgebraicRelativeTolerance>1.0e-5</AlgebraicRelativeTolerance>
+    <StepSize>0.01</StepSize>
+    <Alpha>1.0</Alpha>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>AdamsBashforth</Name>
+    <StepSize>0.01</StepSize>
+    <AutoStepSize>false</AutoStepSize>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>RungeKutta2</Name>
+    <StepSize>0.01</StepSize>
+    <AutoStepSize>false</AutoStepSize>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>RungeKutta4</Name>
+    <StepSize>0.01</StepSize>
+    <AutoStepSize>false</AutoStepSize>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>RungeKutta8</Name>
+    <UseInitialStepSize>false</UseInitialStepSize>
+    <InitialStepSize>0.001</InitialStepSize>
+    <UseMaximumStepSize>false</UseMaximumStepSize>
+    <MaximumStepSize>1.0</MaximumStepSize>
+    <AbsoluteTolerance>1.0e-6</AbsoluteTolerance>
+    <RelativeTolerance>1.0e-6</RelativeTolerance>
+    <SafetyFactor>0.9</SafetyFactor>
+    <Factor1>0.33</Factor1>
+    <Factor2>6.0</Factor2>
+    <Beta>0.0</Beta>
+    <UseMaxNrSteps>false</UseMaxNrSteps>
+    <MaxNrSteps>100000</MaxNrSteps>
+    <UseStiffDetection>false</UseStiffDetection>
+    <MaxNrStiffnessSteps>1000</MaxNrStiffnessSteps>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>RungeKuttaFehlberg</Name>
+    <UseInitialStepSize>false</UseInitialStepSize>
+    <InitialStepSize>0.001</InitialStepSize>
+    <UseMaximumStepSize>false</UseMaximumStepSize>
+    <MaximumStepSize>1.0</MaximumStepSize>
+    <AbsoluteTolerance>1.0e-6</AbsoluteTolerance>
+    <RelativeTolerance>1.0e-6</RelativeTolerance>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>VodeAdams</Name>
+    <UseInitialStepSize>false</UseInitialStepSize>
+    <InitialStepSize>0.001</InitialStepSize>
+    <UseMaximumStepSize>false</UseMaximumStepSize>
+    <MaximumStepSize>1.0</MaximumStepSize>
+    <AbsoluteTolerance>1.0e-6</AbsoluteTolerance>
+    <RelativeTolerance>1.0e-6</RelativeTolerance>
+    <VodeUseBDF>true</VodeUseBDF>
+    <VodeUseNewton>true</VodeUseNewton>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>BDFMethod</Name>
+    <AbsoluteTolerance>1.0e-5</AbsoluteTolerance>
+    <RelativeTolerance>1.0e-5</RelativeTolerance>
+    <AlgebraicAbsoluteTolerance>1.0e-5</AlgebraicAbsoluteTolerance>
+    <AlgebraicRelativeTolerance>1.0e-5</AlgebraicRelativeTolerance>
+    <UseInitialStepSize>false</UseInitialStepSize>
+    <InitialStepSize>0.001</InitialStepSize>
+    <UseMaximumStepSize>false</UseMaximumStepSize>
+    <MaximumStepSize>1.0</MaximumStepSize>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>MeBDFiMethod</Name>
+    <AbsoluteTolerance>1.0e-5</AbsoluteTolerance>
+    <RelativeTolerance>1.0e-5</RelativeTolerance>
+    <AlgebraicAbsoluteTolerance>1.0e-5</AlgebraicAbsoluteTolerance>
+    <AlgebraicRelativeTolerance>1.0e-5</AlgebraicRelativeTolerance>
+    <UseInitialStepSize>false</UseInitialStepSize>
+    <InitialStepSize>0.001</InitialStepSize>
+    <UseMaximumStepSize>false</UseMaximumStepSize>
+    <MaximumStepSize>1.0</MaximumStepSize>
+   </IntegrationMethod>
+   <SelectedIntegrationMethod>8</SelectedIntegrationMethod>
+  </IntegrationMethods>
+ </RunSpecs>
+ <MultipleRun>
+  <NrSteps>10</NrSteps>
+  <CopyFromStates>false</CopyFromStates>
+  <JoinParameterVariation>true</JoinParameterVariation>
+  <ClearAfterRun>true</ClearAfterRun>
+  <RedrawAfterRun>false</RedrawAfterRun>
+  <DrawDuringSimulation>true</DrawDuringSimulation>
+  <ActionBeforeOptimization>0</ActionBeforeOptimization>
+  <CompareValue>0.0</CompareValue>
+  <UseCompareValue>true</UseCompareValue>
+  <MultipleRunType>MultipleRun</MultipleRunType>
+  <Minimize>true</Minimize>
+  <OptimizationVariable></OptimizationVariable>
+  <ResulVarUsage>UseEndValue</ResulVarUsage>
+  <Tolerance>0.001</Tolerance>
+  <OptimizationMethod>BroydonFletcherGoldfarbShanno</OptimizationMethod>
+  <MultipleRunVariables>
+  </MultipleRunVariables>
+ </MultipleRun>
+ <ExportData>
+  <WriteAsText>true</WriteAsText>
+  <ReadAsText>true</ReadAsText>
+  <WriteHeader>true</WriteHeader>
+  <ReadHeader>true</ReadHeader>
+  <ReadFilename></ReadFilename>
+  <WriteFilename></WriteFilename>
+  <DoWrite>false</DoWrite>
+  <ExportVariables>
+   <ExportVariable>
+    <VariableName>time</VariableName>
+   </ExportVariable>
+  </ExportVariables>
+  <ImportVariables>
+  </ImportVariables>
+ </ExportData>
+ <BreakPoints>
+ </BreakPoints>
+ <AnimationPlayback>
+  <PlaybackSpeed>1.0</PlaybackSpeed>
+ </AnimationPlayback>
+</ExpData>
+  </Experiment>
+</Experiments>
+</Document>

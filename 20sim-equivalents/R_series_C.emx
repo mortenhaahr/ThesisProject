@@ -1,0 +1,1101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document>
+ <Model version="5.0" build="5.0.3.12565">
+  <Sidops><![CDATA[model 128 184
+ description '<Information>
+  <Description>
+    <Version>5.0</Version>
+    <IsMainModel>0</IsMainModel>
+    <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>C:\Users\User\Desktop\20sim-equivalents\R_series_C.emx</LibraryPath>
+    <TimeStamp>2023-10-17 04:09:49</TimeStamp>
+  </Description>
+</Information>';
+ type Mainmodel
+ end;
+ implementation bg
+  submodels
+   C 264 416
+    description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\C.emx</LibraryPath>
+  <TimeStamp>2011-11-29 15:58:35</TimeStamp>
+</Description>
+</Information>';
+    type C
+     ports
+      power in p;
+      signal out state;
+     restrictions
+      causality preferred out p;
+    end;
+    icon bg ellipse bottom
+     figures
+      text 'C' 264 416 color 0 18 bold;
+    end;
+    implementation eq
+parameters
+	real c = 1;
+equations
+	state = int(p.f);
+	p.e = state / c;
+implementation_end;
+   Capacitor 184 192
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Capacitor.emx</LibraryPath>
+  <TimeStamp>2007-10-9 17:13:27</TimeStamp>
+</Description>';
+    type Capacitor
+     ports
+      electric delta in p;
+     restrictions
+      causality preferred out p;
+    end;
+    icon ipm bottom
+     figures
+      line 160 192 181 192 color 0;
+      line 181.3 181.3 181.3 202.7 color 0;
+      line 186.7 181.3 186.7 202.7 color 0;
+      line 186.5 192 208 192 color 0;
+     terminals
+      p high 160 192 fixed;
+      p low 208 192 fixed;
+    end;
+    implementation eq
+parameters
+	real C = 1.0  {F};		// capacitance
+equations
+	p.i = C * ddt(p.u);
+    implementation_end;
+   Damper 152 40
+    description '<Description>
+ <Version>4.0</Version>
+ <IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Mechanical\Translation\Components\Damper.emx</LibraryPath>
+  <TimeStamp>2007-11-15 15:48:2</TimeStamp>
+</Description>';
+    type Damper
+     ports
+      translation delta in p;
+    end;
+    icon ipm bottom
+     figures
+      line 154.7 40 176 40 color 0;
+      line 128 40 149.3 40 color 0;
+      line 154.7 31.5 154.7 48.5 color 0;
+      line 144 31.5 154.7 31.5 color 0;
+      line 144 48.5 154.7 48.5 color 0;
+      line 149.3 34.7 149.3 45.3 color 0;
+      rectangle 128 24 176 56 color -1;
+     terminals
+      p high 128 40 fixed;
+      p low 176 40 fixed;
+    end;
+    implementation eq
+parameters
+	real d = 1.0 {N.s/m};		// damping
+equations
+	p.F = d * p.v;
+   implementation_end;
+   FixedWorld 320 48
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Mechanical\Translation\Components\FixedWorld.emx</LibraryPath>
+  <TimeStamp>2007-9-26 10:35:34</TimeStamp>
+</Description>';
+    type FixedWorld
+     ports
+      translation psi duplicatable in p;
+     restrictions
+      causality fixed in p;
+    end;
+    icon ipm bottom
+     figures
+      line 314.1 36.8 314.1 58.1 color 0 width 2;
+      line 314.1 36.8 319.5 42.1 color 0;
+      line 314.1 42.1 319.5 47.5 color 0;
+      line 314.1 47.5 319.5 52.8 color 0;
+      line 314.1 52.8 319.5 58.1 color 0;
+      rectangle 312 32 328 64 color -1;
+     terminals
+      p 312 40;
+      p 312 40;
+    end;
+    implementation eq
+equations
+	p.v = 0;
+ implementation_end;
+   Force 47.2 42.1
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Mechanical\Translation\Actuators\Force.emx</LibraryPath>
+  <TimeStamp>2007-10-23 22:45:0</TimeStamp>
+</Description>';
+    type Force
+     ports
+      translation psi out p;
+     restrictions
+      causality fixed out p;
+    end;
+    icon ipm bottom
+     figures
+      line 56.6 40 70.4 40 color 0 end;
+      text 'F' 51.2 40 color 0 14;
+      line 29.9 29.3 29.9 56 color 0 width 2;
+      line 24 27.2 29.9 32.5 color 0 fill 2005303;
+      line 24 32.5 29.9 37.9 color 0 fill 2005303;
+      line 24 37.9 29.9 43.2 color 0 fill 2005303;
+      line 24 43.2 29.9 48.5 color 0 fill 2005303;
+      line 24 48.5 29.9 53.9 color 0 fill 2005303;
+      line 42.7 40 31 40 color 0 end;
+     terminals
+      p 72 40 fixed;
+    end;
+    implementation eq
+parameters
+	real F = 1.0 {N};		// force
+variables
+	real hidden v {m/s};
+equations
+	p.F = F; 
+	v = p.v;implementation_end;
+   Ground 160 312
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Ground.emx</LibraryPath>
+  <TimeStamp>2007-9-25 11:57:33</TimeStamp>
+</Description>';
+    type Ground
+     ports
+      electric psi duplicatable in p;
+     restrictions
+      causality fixed out p;
+    end;
+    icon ipm bottom
+     figures
+      line 152 312 168 312 color 0;
+      line 154.7 316.3 165.3 316.3 color 0;
+      line 157.3 320 162.7 320 color 0;
+      line 160 304 160 312 color 0;
+     terminals
+      p 160 304 fixed;
+      p 160 304 fixed;
+      p 160 304 fixed;
+    end;
+    implementation eq
+equations
+	p.u = 0;
+ implementation_end;
+   HydroResistor 592 296
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Iconic Diagrams\Electric\Components\Resistor.emx</LibraryPath><TimeStamp>2007-9-25 11:58:20</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate></Description></Information>';
+    type Resistor
+     ports
+      hydraulic delta in p;
+    end;
+    icon ipm bottom
+     figures
+      line 568 296 616 296 color 0;
+      rectangle 576 284 608 308 color 0 fill 16777215;
+     terminals
+      p high 568 296 fixed;
+      p low 616 296 fixed;
+    end;
+    implementation eq
+parameters
+	real r = 1.0 {Pa.s/m3};		// Pascal-second per cubic meter
+equations
+	p.p = r * p.phi;implementation_end;
+   Node1 159.9 287.9
+    description '<Description><Version>4.0</Version>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Node.emx</LibraryPath>
+  <TimeStamp>2007-10-31 11:27:14</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+    knot Node
+     ports
+      electric knot psi duplicatable none p [1];
+    end;
+    icon bg ellipse
+     figures
+      ellipse 156.8 284.8 163.2 291.2 color -1 fill 0;
+      ellipse 155.7 283.7 164.2 292.2 color -1;
+     terminals
+      p 160 288 fixed;
+      p 160 288 fixed;
+      p 160 288 fixed;
+      p 160 288 fixed;
+      p 160 288 fixed;
+      p 160 288 fixed;
+      p 160 288 fixed;
+    end;
+    implementation eq
+equations
+	sum (direct (p.t)) = 0;
+	equal (collect (p.a));
+  implementation_end;
+   Node2 103.9 39.9
+    description '<Description><Version>4.0</Version>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Node.emx</LibraryPath>
+  <TimeStamp>2007-10-31 11:27:14</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+    knot Node
+     ports
+      translation knot psi duplicatable none p [1];
+    end;
+    icon bg ellipse
+     figures
+      ellipse 100.8 36.8 107.2 43.2 color -1 fill 0;
+      ellipse 99.7 35.7 108.2 44.2 color -1;
+     terminals
+      p 104 40 fixed;
+      p 104 40 fixed;
+      p 104 40 fixed;
+      p 104 40 fixed;
+      p 104 40 fixed;
+      p 104 40 fixed;
+      p 104 40 fixed;
+    end;
+    implementation eq
+equations
+	sum (direct (p.t)) = 0;
+	equal (collect (p.a));
+  implementation_end;
+   Node3 215.9 39.9
+    description '<Description><Version>4.0</Version>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Node.emx</LibraryPath>
+  <TimeStamp>2007-10-31 11:27:14</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+    knot Node
+     ports
+      translation knot psi duplicatable none p [1];
+    end;
+    icon bg ellipse
+     figures
+      ellipse 212.8 36.8 219.2 43.2 color -1 fill 0;
+      ellipse 211.7 35.7 220.2 44.2 color -1;
+     terminals
+      p 216 40 fixed;
+      p 216 40 fixed;
+      p 216 40 fixed;
+      p 216 40 fixed;
+      p 216 40 fixed;
+      p 216 40 fixed;
+      p 216 40 fixed;
+    end;
+    implementation eq
+equations
+	sum (direct (p.t)) = 0;
+	equal (collect (p.a));
+  implementation_end;
+   OneJunction 176 392
+    description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\OneJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:17:51</TimeStamp>
+</Description>
+</Information>';
+    knot OneJunction
+     ports
+      power knot duplicatable none p [1];
+      signal knot out flow [1];
+     restrictions
+      causality constraint one_out p;
+    end;
+    icon bg ellipse
+     figures
+      text '1' 176 392 color 0 18 bold;
+    end;
+    implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+   PressureSource 492 300.5
+    description '<Information><Description><Version>4.9</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Iconic Diagrams\20-sim Lib\Hydraulics\Pumps\Basic Pumps\PressureSource.emx</LibraryPath><TimeStamp>2021-9-1 15:50:41</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><ModelVersion><MajorVersion>2</MajorVersion><MinorVersion>0</MinorVersion><PatchVersion>0</PatchVersion></ModelVersion><Description>Revision History
+1.0.0 first version, works with general fluid properties model
+2.0.0 parameter ranges added</Description><Author>C. Kleijn</Author><Company>Controllab Products B.V.</Company></Description></Information>';
+    type PressureSource
+     ports
+      hydraulic psi out p;
+     restrictions
+      causality fixed out p;
+    end;
+    icon ipm bottom
+     figures
+      line 464 312 464 296 528 296 color 0;
+      ellipse 480 280 512 312 color 0 fill 16777215;
+      line 456 312 456 320 472 320 472 312 color 0;
+      text 'p' 495 293.4 color 16711680 14;
+      line 510.8 295.3 502.8 291.2 502.8 299.2 510.8 295.3 color 0 fill 0;
+     terminals
+      p 528 296 fixed;
+    end;
+    implementation eq
+parameters
+	real p = 1 {Pa};	// pressure
+equations
+	p.p = p;
+
+implementation_end;
+   R1 264 352
+    description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\R.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:35:37</TimeStamp>
+</Description>
+</Information>';
+    type R
+     ports
+      power in p;
+    end;
+    icon bg ellipse bottom
+     figures
+      text 'R' 264 352 color 0 18 bold;
+    end;
+    implementation eq
+parameters
+	real r = 1.0;
+equations
+	p.e = r * p.f;
+implementation_end;
+   Resistor 96 192
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Resistor.emx</LibraryPath>
+  <TimeStamp>2007-9-25 11:58:20</TimeStamp>
+</Description>';
+    type Resistor
+     ports
+      electric delta in p;
+    end;
+    icon ipm bottom
+     figures
+      line 72 192 120 192 color 0;
+      rectangle 80 180 112 204 color 0 fill 16777215;
+     terminals
+      p high 72 192 fixed;
+      p low 120 192 fixed;
+    end;
+    implementation eq
+parameters
+	real R = 1.0 {ohm};		// resistance
+equations
+	p.u = R * p.i;
+      implementation_end;
+   Se 80 392
+    description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\Se.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:36:49</TimeStamp>
+</Description>
+</Information>';
+    type Se
+     ports
+      power out p;
+     restrictions
+      causality fixed out p;
+    end;
+    icon bg ellipse bottom
+     figures
+      text 'Se' 80 392 color 0 18 bold;
+    end;
+    implementation eq
+parameters
+	real effort = 1;
+variables
+	real flow;
+equations
+	p.e = effort;
+	flow = p.f;
+implementation_end;
+   Spring 152 -16
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Mechanical\Translation\Components\Spring.emx</LibraryPath>
+  <TimeStamp>2007-9-26 10:43:2</TimeStamp>
+</Description>';
+    type Spring
+     ports
+      translation delta in p;
+     restrictions
+      causality preferred out p;
+    end;
+    icon ipm bottom
+     figures
+      line 128 -16 133.3 -16 137.6 -22.4 143.5 -9.6 149.3 -22.4 155.2 -9.6 161.1 -22.4 166.9 -9.6 170.7 -16 176 -16 color 0;
+     terminals
+      p high 128 -16 fixed;
+      p low 176 -16 fixed;
+    end;
+    implementation eq
+parameters
+	real k = 1.0  {N/m};			// stiffness
+variables
+	real x {m};   // extension
+equations
+	x = int (p.v);
+	p.F = k * x;
+implementation_end;
+   Tank 688 296
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Iconic Diagrams\Electric\Components\Capacitor.emx</LibraryPath><TimeStamp>2007-10-9 17:13:27</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate></Description></Information>';
+    type Capacitor
+     ports
+      hydraulic delta in p;
+     restrictions
+      causality preferred out p;
+    end;
+    icon ipm bottom
+     figures
+      line 664 296 685 296 color 0;
+      line 685.3 285.3 685.3 306.7 color 0;
+      line 690.7 285.3 690.7 306.7 color 0;
+      line 690.5 296 712 296 color 0;
+     terminals
+      p high 664 296 fixed;
+      p low 712 296 fixed;
+    end;
+    implementation eq
+parameters
+	real C = 1.0  {m3};		// capacitance
+equations
+	p.phi = C * ddt(p.p);
+    implementation_end;
+   TankRef 776 312
+    description '<Information><Description><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><AllowLibraryUpdate>True</AllowLibraryUpdate><ModelVersion><MajorVersion>2</MajorVersion><MinorVersion>0</MinorVersion><PatchVersion>0</PatchVersion></ModelVersion><Description>1.0.0: First version, also works with general fluid properties model
+2.0.0: p_preload renamced to p_tank, range added
+          renamed from TankNoRes to Tank</Description><Author>C. Klejin</Author><Company>Controllab Products B.V.</Company><LibraryPath>Iconic Diagrams\Hydraulics\Volumes\Tank.emx</LibraryPath><TimeStamp>2021-12-15 10:44:46</TimeStamp><Version>4.9</Version></Description></Information>';
+    type Tank
+     ports
+      hydraulic psi in p;
+     restrictions
+      causality fixed out p;
+    end;
+    icon ipm bottom
+     figures
+      line 768 320 768 328 784 328 784 320 color 0;
+      line 776 320 776 296 color 0;
+     terminals
+      p 776 296 fixed;
+    end;
+    implementation eq
+parameters
+	real p_preload = 0 {Pa};	// tank pressure
+equations
+	p.p = p_preload;implementation_end;
+   VoltageSource 31.9 240
+			specifications active 'DC'
+				specification 'AC'
+description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+	   <LibraryPath>Iconic Diagrams\Electric\Sources\VoltageSource.emx</LibraryPath>
+	  <TimeStamp>2008-1-24 10:10:10</TimeStamp>
+</Description>';
+ type VoltageSource
+  ports
+   electric delta out p;
+  restrictions
+   causality fixed out p;
+ end;
+ icon bg bottom
+  figures
+   group
+    line 192 147 192 155;
+    line 188 151 196 151;
+   end;
+   line 200 144 200 192;
+   ellipse 188.9 157.3 211.3 179.7 fill 16777215;
+   spline 192.1 167.8 197.4 162.2 202.7 173.2 207.9 167.8;
+  terminals
+   p high 200 144 fixed;
+   p low 200 192 fixed;
+ end;
+ implementation eq
+parameters
+	real U = 220 {V};		// voltage
+	real f = 50 {Hz};			// frequency
+variables
+	real hidden current {A};
+equations
+	p.u = U * sin ( 2 * pi * f * time );
+   	current = p.i;implementation_end;
+specification_end;
+				specification 'DC'
+ description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Electric\Sources\VoltageSource.emx</LibraryPath>
+  <TimeStamp>2008-1-24 10:10:10</TimeStamp>
+</Description>';
+ type VoltageSource
+  ports
+   electric delta out p;
+  restrictions
+   causality fixed out p;
+ end;
+ icon bg bottom
+  figures
+   line 32 216 32 264 color 0;
+   ellipse 21.3 229.3 43.7 251.7 color 0 fill 16777215;
+   line 21.2 222.4 28.7 222.4 color 0;
+   line 24.4 219.2 24.4 226.7 color 0;
+  terminals
+   p high 32 216 fixed;
+   p low 32 264 fixed;
+ end;
+ implementation eq
+parameters
+	real U = 1 {V};		// voltage
+variables
+	real hidden current {A};
+equations
+	p.u = U;
+	current = p.i;             implementation_end;
+specification_end;
+			end;
+  end;
+  connections
+   Capacitor\p_low => Node1\p 272 192 272 288;
+   Damper\p_high <= Node2\p;
+   Damper\p_low => Node3\p;
+   Ground\p => Node1\p;
+   HydroResistor\p_low => Tank\p_high;
+   Node2\p <= Force\p;
+   Node3\p => FixedWorld\p;
+   OneJunction\p => C\p;
+   OneJunction\p => R1\p;
+   PressureSource\p => HydroResistor\p_high;
+   Resistor\p_low => Capacitor\p_high;
+   Se\p => OneJunction\p;
+   Spring\p_high <= Node2\p 104 -16;
+   Spring\p_low => Node3\p 216 -16;
+   Tank\p_low => TankRef\p;
+   VoltageSource\p_high => Resistor\p_high 32 192;
+   VoltageSource\p_low <= Node1\p 32 288;
+  end;
+  figures
+   text 'The four circuits are equivalent' 512 512 color 0 85;
+ implementation_end;
+]]></Sidops>
+ </Model>
+ <Experiments>
+  <DefaultExperiment><![CDATA[Experiment 1]]></DefaultExperiment>
+<Experiment>
+   <Name>Experiment 1</Name>
+   <CreatedBy></CreatedBy>
+   <Info></Info>
+<ExpData>
+ <VersionNumber>5.0</VersionNumber>
+ <ModelProperties>
+ </ModelProperties>
+ <Variables>
+  <Parameters>
+  </Parameters>
+  <Initials>
+   <Variable>
+    <Name>C\state_initial</Name>
+    <Value>0.0</Value>
+   </Variable>
+   <Variable>
+    <Name>Capacitor\p.u_initial</Name>
+    <Unit>V</Unit>
+    <Value>0.0</Value>
+   </Variable>
+   <Variable>
+    <Name>Spring\x_initial</Name>
+    <Unit>m</Unit>
+    <Value>0.0</Value>
+   </Variable>
+   <Variable>
+    <Name>Tank\p.p_initial</Name>
+    <Unit>Pa</Unit>
+    <Value>0.0</Value>
+   </Variable>
+  </Initials>
+ </Variables>
+ <PlotSpecs>
+  <VarNames>
+   <VarName>time</VarName>
+   <VarName>Capacitor\p.u</VarName>
+   <VarName>Capacitor\p.i</VarName>
+   <VarName>Tank\p.phi</VarName>
+   <VarName>Tank\p.p</VarName>
+   <VarName>C\p.e</VarName>
+   <VarName>C\p.f</VarName>
+   <VarName>Spring\p.F</VarName>
+   <VarName>Spring\p.v</VarName>
+  </VarNames>
+  <Plots>
+   <Plot>
+    <PlotType>GraphPlot</PlotType>
+    <BasePlot>
+     <PlotId>1</PlotId>
+     <UseWindowsBGColor>false</UseWindowsBGColor>
+     <BGColor>16777215</BGColor>
+     <PlotIsVisible>true</PlotIsVisible>
+     <Solo>false</Solo>
+    </BasePlot>
+    <Grid>
+     <DrawGrid>true</DrawGrid>
+     <GridColor>15780518</GridColor>
+     <GridBorderLineColor>12624260</GridBorderLineColor>
+     <GridZeroLineColor>0</GridZeroLineColor>
+     <XTicks>10</XTicks>
+     <YTicks>10</YTicks>
+     <ZTicks>10</ZTicks>
+     <Use3DLook>false</Use3DLook>
+    </Grid>
+    <PlotBGColor>16777215</PlotBGColor>
+    <ShowPlotTitle>true</ShowPlotTitle>
+    <TitlePosition>1</TitlePosition>
+    <PlotTitle>model</PlotTitle>
+    <ShowXValues>true</ShowXValues>
+    <Fonts>
+     <TitleFont>
+      <Name>Arial</Name>
+      <Height>12</Height>
+      <PitchFamily>34</PitchFamily>
+      <Weight>400</Weight>
+      <Italic>0</Italic>
+      <UnderLine>0</UnderLine>
+      <StrikeOut>0</StrikeOut>
+      <Color>0</Color>
+     </TitleFont>
+     <LabelFont>
+      <Name>Arial</Name>
+      <Height>12</Height>
+      <PitchFamily>34</PitchFamily>
+      <Weight>400</Weight>
+      <Italic>0</Italic>
+      <UnderLine>0</UnderLine>
+      <StrikeOut>0</StrikeOut>
+      <Color>0</Color>
+     </LabelFont>
+     <ValuesFont>
+      <Name>Arial</Name>
+      <Height>10</Height>
+      <PitchFamily>34</PitchFamily>
+      <Weight>400</Weight>
+      <Italic>0</Italic>
+      <UnderLine>0</UnderLine>
+      <StrikeOut>0</StrikeOut>
+      <Color>0</Color>
+     </ValuesFont>
+     <LegendFont>
+      <Name>Arial</Name>
+      <Height>12</Height>
+      <PitchFamily>34</PitchFamily>
+      <Weight>400</Weight>
+      <Italic>0</Italic>
+      <UnderLine>0</UnderLine>
+      <StrikeOut>0</StrikeOut>
+      <Color>0</Color>
+     </LegendFont>
+    </Fonts>
+    <SharedXAxis>true</SharedXAxis>
+    <SharedYAxis>true</SharedYAxis>
+    <SharedZAxis>false</SharedZAxis>
+    <XAxes>
+     <Axis>
+      <Minimum>0.0</Minimum>
+      <Maximum>10.0</Maximum>
+      <Linear>true</Linear>
+      <Scaling>3</Scaling>
+      <Label>time</Label>
+     </Axis>
+    </XAxes>
+    <YAxes>
+     <Axis>
+      <Minimum>-0.4000000000000001</Minimum>
+      <Maximum>1.5999999999999999</Maximum>
+      <Linear>true</Linear>
+      <Scaling>2</Scaling>
+      <Label>Capacitor u</Label>
+     </Axis>
+     <Axis>
+      <Minimum>-0.4</Minimum>
+      <Maximum>1.6</Maximum>
+      <Linear>true</Linear>
+      <Scaling>2</Scaling>
+      <Label>Capacitor i</Label>
+     </Axis>
+     <Axis>
+      <Minimum>-0.4</Minimum>
+      <Maximum>1.6</Maximum>
+      <Linear>true</Linear>
+      <Scaling>2</Scaling>
+      <Label>Tank phi</Label>
+     </Axis>
+     <Axis>
+      <Minimum>-0.4</Minimum>
+      <Maximum>1.6</Maximum>
+      <Linear>true</Linear>
+      <Scaling>2</Scaling>
+      <Label>Tank p</Label>
+     </Axis>
+     <Axis>
+      <Minimum>-0.4</Minimum>
+      <Maximum>1.6</Maximum>
+      <Linear>true</Linear>
+      <Scaling>2</Scaling>
+      <Label>C e</Label>
+     </Axis>
+     <Axis>
+      <Minimum>-0.4</Minimum>
+      <Maximum>1.6</Maximum>
+      <Linear>true</Linear>
+      <Scaling>2</Scaling>
+      <Label>C f</Label>
+     </Axis>
+     <Axis>
+      <Minimum>-0.4</Minimum>
+      <Maximum>1.6</Maximum>
+      <Linear>true</Linear>
+      <Scaling>2</Scaling>
+      <Label>Spring F</Label>
+     </Axis>
+     <Axis>
+      <Minimum>-0.4</Minimum>
+      <Maximum>1.6</Maximum>
+      <Linear>true</Linear>
+      <Scaling>2</Scaling>
+      <Label>Spring v</Label>
+     </Axis>
+    </YAxes>
+    <ZAxes>
+    </ZAxes>
+    <Curves>
+     <Curve>
+      <LineColor>3355111</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>3355111</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>true</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>Capacitor\p.u</VarName>
+      </YCurveData>
+     </Curve>
+     <Curve>
+      <LineColor>6076255</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>6076255</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>true</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>Capacitor\p.i</VarName>
+      </YCurveData>
+     </Curve>
+     <Curve>
+      <LineColor>12553035</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>12553035</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>true</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>Tank\p.phi</VarName>
+      </YCurveData>
+     </Curve>
+     <Curve>
+      <LineColor>15086320</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>15086320</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>true</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>Tank\p.p</VarName>
+      </YCurveData>
+     </Curve>
+     <Curve>
+      <LineColor>15790150</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>15790150</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>true</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>C\p.e</VarName>
+      </YCurveData>
+     </Curve>
+     <Curve>
+      <LineColor>1696255</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>1696255</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>true</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>C\p.f</VarName>
+      </YCurveData>
+     </Curve>
+     <Curve>
+      <LineColor>4089775</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>4089775</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>true</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>Spring\p.F</VarName>
+      </YCurveData>
+     </Curve>
+     <Curve>
+      <LineColor>10724259</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>10724259</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>true</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>Spring\p.v</VarName>
+      </YCurveData>
+     </Curve>
+    </Curves>
+    <Legenda>
+     <ShowLegenda>true</ShowLegenda>
+     <BorderPenColor>0</BorderPenColor>
+     <BackgroundColor>16777215</BackgroundColor>
+    </Legenda>
+   </Plot>
+  </Plots>
+  <PlotPanels>
+   <PlotPanel>
+    <PlotPanelId>1</PlotPanelId>
+    <PlotPanelVisible>true</PlotPanelVisible>
+    <Name>Window 1</Name>
+    <Tiling>0</Tiling>
+    <PlotIds>
+     <PlotId>1</PlotId>
+    </PlotIds>
+    <ToggleState>Base</ToggleState>
+   </PlotPanel>
+  </PlotPanels>
+ </PlotSpecs>
+ <RunSpecs>
+  <SimulatorSettings>
+   <StartTime>0.0</StartTime>
+   <FinishTime>10.0</FinishTime>
+   <AllowPassFinishTime>false</AllowPassFinishTime>
+   <Warp>false</Warp>
+   <SimulationMode>0</SimulationMode>
+   <FPGonio>false</FPGonio>
+   <UseOutputAfterEach>false</UseOutputAfterEach>
+   <OutputAfterEach>0.1</OutputAfterEach>
+   <EventEpsilon>1.0e-6</EventEpsilon>
+   <AlgebraicTolerance>1.0e-7</AlgebraicTolerance>
+   <SteadyStateAnalysis>false</SteadyStateAnalysis>
+   <UpdateHoldInstructions>true</UpdateHoldInstructions>
+  </SimulatorSettings>
+  <IntegrationMethods>
+   <IntegrationMethod>
+    <Name>Euler</Name>
+    <StepSize>0.01</StepSize>
+    <AutoStepSize>false</AutoStepSize>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>BackwardEuler</Name>
+    <AbsoluteTolerance>1.0e-5</AbsoluteTolerance>
+    <RelativeTolerance>1.0e-5</RelativeTolerance>
+    <AlgebraicAbsoluteTolerance>1.0e-5</AlgebraicAbsoluteTolerance>
+    <AlgebraicRelativeTolerance>1.0e-5</AlgebraicRelativeTolerance>
+    <StepSize>0.01</StepSize>
+    <Alpha>1.0</Alpha>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>AdamsBashforth</Name>
+    <StepSize>0.01</StepSize>
+    <AutoStepSize>false</AutoStepSize>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>RungeKutta2</Name>
+    <StepSize>0.01</StepSize>
+    <AutoStepSize>false</AutoStepSize>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>RungeKutta4</Name>
+    <StepSize>0.01</StepSize>
+    <AutoStepSize>false</AutoStepSize>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>RungeKutta8</Name>
+    <UseInitialStepSize>false</UseInitialStepSize>
+    <InitialStepSize>0.001</InitialStepSize>
+    <UseMaximumStepSize>false</UseMaximumStepSize>
+    <MaximumStepSize>1.0</MaximumStepSize>
+    <AbsoluteTolerance>1.0e-6</AbsoluteTolerance>
+    <RelativeTolerance>1.0e-6</RelativeTolerance>
+    <SafetyFactor>0.9</SafetyFactor>
+    <Factor1>0.33</Factor1>
+    <Factor2>6.0</Factor2>
+    <Beta>0.0</Beta>
+    <UseMaxNrSteps>false</UseMaxNrSteps>
+    <MaxNrSteps>100000</MaxNrSteps>
+    <UseStiffDetection>false</UseStiffDetection>
+    <MaxNrStiffnessSteps>1000</MaxNrStiffnessSteps>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>RungeKuttaFehlberg</Name>
+    <UseInitialStepSize>false</UseInitialStepSize>
+    <InitialStepSize>0.001</InitialStepSize>
+    <UseMaximumStepSize>false</UseMaximumStepSize>
+    <MaximumStepSize>1.0</MaximumStepSize>
+    <AbsoluteTolerance>1.0e-6</AbsoluteTolerance>
+    <RelativeTolerance>1.0e-6</RelativeTolerance>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>VodeAdams</Name>
+    <UseInitialStepSize>false</UseInitialStepSize>
+    <InitialStepSize>0.001</InitialStepSize>
+    <UseMaximumStepSize>false</UseMaximumStepSize>
+    <MaximumStepSize>1.0</MaximumStepSize>
+    <AbsoluteTolerance>1.0e-6</AbsoluteTolerance>
+    <RelativeTolerance>1.0e-6</RelativeTolerance>
+    <VodeUseBDF>true</VodeUseBDF>
+    <VodeUseNewton>true</VodeUseNewton>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>BDFMethod</Name>
+    <AbsoluteTolerance>1.0e-5</AbsoluteTolerance>
+    <RelativeTolerance>1.0e-5</RelativeTolerance>
+    <AlgebraicAbsoluteTolerance>1.0e-5</AlgebraicAbsoluteTolerance>
+    <AlgebraicRelativeTolerance>1.0e-5</AlgebraicRelativeTolerance>
+    <UseInitialStepSize>false</UseInitialStepSize>
+    <InitialStepSize>0.001</InitialStepSize>
+    <UseMaximumStepSize>false</UseMaximumStepSize>
+    <MaximumStepSize>1.0</MaximumStepSize>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>MeBDFiMethod</Name>
+    <AbsoluteTolerance>1.0e-5</AbsoluteTolerance>
+    <RelativeTolerance>1.0e-5</RelativeTolerance>
+    <AlgebraicAbsoluteTolerance>1.0e-5</AlgebraicAbsoluteTolerance>
+    <AlgebraicRelativeTolerance>1.0e-5</AlgebraicRelativeTolerance>
+    <UseInitialStepSize>false</UseInitialStepSize>
+    <InitialStepSize>0.001</InitialStepSize>
+    <UseMaximumStepSize>false</UseMaximumStepSize>
+    <MaximumStepSize>1.0</MaximumStepSize>
+   </IntegrationMethod>
+   <SelectedIntegrationMethod>8</SelectedIntegrationMethod>
+  </IntegrationMethods>
+ </RunSpecs>
+ <MultipleRun>
+  <NrSteps>10</NrSteps>
+  <CopyFromStates>false</CopyFromStates>
+  <JoinParameterVariation>true</JoinParameterVariation>
+  <ClearAfterRun>true</ClearAfterRun>
+  <RedrawAfterRun>false</RedrawAfterRun>
+  <DrawDuringSimulation>true</DrawDuringSimulation>
+  <ActionBeforeOptimization>0</ActionBeforeOptimization>
+  <CompareValue>0.0</CompareValue>
+  <UseCompareValue>true</UseCompareValue>
+  <MultipleRunType>MultipleRun</MultipleRunType>
+  <Minimize>true</Minimize>
+  <OptimizationVariable></OptimizationVariable>
+  <ResulVarUsage>UseEndValue</ResulVarUsage>
+  <Tolerance>0.001</Tolerance>
+  <OptimizationMethod>BroydonFletcherGoldfarbShanno</OptimizationMethod>
+  <MultipleRunVariables>
+  </MultipleRunVariables>
+ </MultipleRun>
+ <ExportData>
+  <WriteAsText>true</WriteAsText>
+  <ReadAsText>true</ReadAsText>
+  <WriteHeader>true</WriteHeader>
+  <ReadHeader>true</ReadHeader>
+  <ReadFilename></ReadFilename>
+  <WriteFilename></WriteFilename>
+  <DoWrite>false</DoWrite>
+  <ExportVariables>
+   <ExportVariable>
+    <VariableName>time</VariableName>
+   </ExportVariable>
+  </ExportVariables>
+  <ImportVariables>
+  </ImportVariables>
+ </ExportData>
+ <BreakPoints>
+ </BreakPoints>
+ <AnimationPlayback>
+  <PlaybackSpeed>1.0</PlaybackSpeed>
+ </AnimationPlayback>
+</ExpData>
+  </Experiment>
+</Experiments>
+</Document>

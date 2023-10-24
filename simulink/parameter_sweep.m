@@ -1,17 +1,7 @@
-% PipeC_vals = [0.1, 1, 10, 100];
-% PipeL_vals = [0.1, 1, 10, 100];
-% PipeL_vals = [7.65e-2];
-
 modelName = 'water_system_electrical_model';
-open_system(modelName);
-oldConf = getActiveConfigSet(modelName);
-simConfig = copy(oldConf);
-set_param(simConfig,"Name","GrundfosTestSetup","StopTime","20");
-attachConfigSet(modelName, simConfig, true);
-setActiveConfigSet(modelName, simConfig.Name);
 
-
-parms = struct("PipeR", [10, 100], "PipeC", [0.1, 1]);
+%parms = struct("Voltage", 4e5, "PipeR", [3e8], "PipeL", [5038222], "PipeCStart", [2.80e-12], "PipeCEnd", [2.80e-12], "SinkR", [3e8*7]);
+parms = struct("Voltage", 1, "PipeR", 1, "PipeCStart", 1, "PipeCEnd", 1, "PipeL", 1, "SinkR", 1);
 simOutputs = run_simulations(modelName, "10", parms);
 
 % Create a new figure
@@ -19,7 +9,7 @@ figure;
 % Loop through each SimulationOutput in the simOut vector
 for i = 1:numel(simOutputs)
     % Extract time and output data for each simulation
-    outputData = simOutputs(i).logsout.getElement("PipingPressure");
+    outputData = simOutputs(i).logsout.getElement("PipingFlow");
 
     % Plot the data with a unique line style for each simulation
     % ' PipeL: ' num2str(PipeL_vals(i))
@@ -37,6 +27,9 @@ legend('Location', 'best'); % Display the legend
 
 % Turn off hold to prevent further data from being added to the plot
 hold off;
+
+% disp(parms);
+% disp("Max: " + num2str(max(outputData.Values)));
 
 function res = run_simulations(modelName, stopTime, parms)
 % Runs one or more simumlations with the given modelName and for the given
@@ -61,7 +54,9 @@ end
 end
 
 function res = do_simulation(simIn, parms)
-defaultValues = struct("PipeR", 1, "PipeC", 1, "PipeL", 1, "PipeCOn", false, "PipeLOn", false);
+defaultValues = struct( "Voltage", 1, "PipeR", 1, "PipeCStart", 0, "PipeCEnd", 0, ...
+                        "PipeL", 0, "LeakageR", 0, "ToiletR", 0, ...
+                        "ShowerR", 0, "SinkR", 0);
 
 defaultNames = fieldnames(defaultValues);
 for i = 1:numel(defaultNames)

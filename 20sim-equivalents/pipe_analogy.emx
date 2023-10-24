@@ -8,7 +8,7 @@
     <IsMainModel>0</IsMainModel>
     <KeepParameterValues>False</KeepParameterValues>
     <LibraryPath>Z:\20sim-equivalents\pipe_analogy.emx</LibraryPath>
-    <TimeStamp>2023-10-24 02:54:45</TimeStamp>
+    <TimeStamp>2023-10-24 03:23:44</TimeStamp>
   </Description>
 </Information>';
  type Mainmodel
@@ -38,7 +38,7 @@
     end;
     implementation eq
 parameters
-	real C = 1.23287  {F};		// capacitance
+	real C = 1.23287e-12  {F};		// capacitance
 equations
 	// p.i = C * ddt(p.u);
 	p.u = 1/C * int(p.i);
@@ -67,7 +67,7 @@ equations
     end;
     implementation eq
 parameters
-	real C = 1.23287  {F};		// capacitance
+	real C = 1.23287e-12  {F};		// capacitance
 equations
 	// p.i = C * ddt(p.u);
 	p.u = 1/C * int(p.i);
@@ -911,7 +911,7 @@ parameters
 equations
 	//p.u = L * ddt(p.i);
    p.i = 1/L * int(p.u); implementation_end;
-   Line1 240 120
+   Line1 232 120
 			specifications active 'Default'
 				specification 'Default'
  description '<Information>
@@ -950,12 +950,12 @@ equations
  end;
  icon bg bottom
   figures
-   rectangle 208 112 272 128 color -1 fill 14671839;
-   line 208 112 272 112 color 0 fill 14671839;
-   line 208 128 272 128 color 0 fill 14671839;
+   rectangle 200 112 264 128 color -1 fill 14671839;
+   line 200 112 264 112 color 0 fill 14671839;
+   line 200 128 264 128 color 0 fill 14671839;
   terminals
-   p_in 208 120 fixed;
-   p_out 272 120 fixed;
+   p_in 200 120 fixed;
+   p_out 264 120 fixed;
  end;
  implementation bg
   submodels
@@ -1409,6 +1409,12 @@ equations
       p 160 216 fixed;
       p 160 216 fixed;
       p 160 216 fixed;
+      p 160 216 fixed;
+      p 160 216 fixed;
+      p 160 216 fixed;
+      p 160 216 fixed;
+      p 160 216 fixed;
+      p 160 216 fixed;
     end;
     implementation eq
 equations
@@ -1577,12 +1583,13 @@ specification_end;
    Node2\p => Resistor\p_high;
    Resistor\p_low => Inductor\p_high;
    Tank\p <= Line1\p_out;
-   VoltageSource\p_high => Node2\p 80 224 80 216;
+   VoltageSource\p_high => Node2\p 80 216;
   end;
   figures
    text 'Top: Default parameters for a DC pressure source and the "line" component which models a pipe.
 Bottom: The equivalent electrical circuit where the parameters for the capacitor, resistor and inductor are taken from the hydraulic domain.
-NOTE: The electrical resistor has been changed significantly to match the hydraulic model of friction. (Takes laminar/turbolent flow into account). So the resistor value varies quite a bit with the flow.' 576 400 color 0 16;
+NOTE: The electrical resistor has been changed significantly to match the hydraulic model of friction. (Takes laminar/turbolent flow into account). So the resistor value varies quite a bit with the flow.
+NOTE: The capacitive elements do not influence the dynamics in this configuration (because they are directly connected to VCC/GND)' 576 400 color 0 16;
  implementation_end;
 ]]></Sidops>
  </Model>
@@ -1617,6 +1624,8 @@ NOTE: The electrical resistor has been changed significantly to match the hydrau
    <VarName>time</VarName>
    <VarName>ModulatedPressureSource\p.phi</VarName>
    <VarName>Resistor\p.i</VarName>
+   <VarName>Resistor\p.u</VarName>
+   <VarName>Line1\Friction\p.p</VarName>
   </VarNames>
   <Plots>
    <Plot>
@@ -1691,7 +1700,7 @@ NOTE: The electrical resistor has been changed significantly to match the hydrau
     <XAxes>
      <Axis>
       <Minimum>0.0</Minimum>
-      <Maximum>10.0</Maximum>
+      <Maximum>20.0</Maximum>
       <Linear>true</Linear>
       <Scaling>3</Scaling>
       <Label>time</Label>
@@ -1711,6 +1720,20 @@ NOTE: The electrical resistor has been changed significantly to match the hydrau
       <Linear>true</Linear>
       <Scaling>2</Scaling>
       <Label>p.i</Label>
+     </Axis>
+     <Axis>
+      <Minimum>-0.004</Minimum>
+      <Maximum>0.016</Maximum>
+      <Linear>true</Linear>
+      <Scaling>2</Scaling>
+      <Label>p.u</Label>
+     </Axis>
+     <Axis>
+      <Minimum>-0.004</Minimum>
+      <Maximum>0.016</Maximum>
+      <Linear>true</Linear>
+      <Scaling>2</Scaling>
+      <Label>p.p</Label>
      </Axis>
     </YAxes>
     <ZAxes>
@@ -1752,6 +1775,44 @@ NOTE: The electrical resistor has been changed significantly to match the hydrau
       <YCurveData>
        <ShowUnit>true</ShowUnit>
        <VarName>Resistor\p.i</VarName>
+      </YCurveData>
+     </Curve>
+     <Curve>
+      <LineColor>12553035</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>12553035</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>false</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>Resistor\p.u</VarName>
+      </YCurveData>
+     </Curve>
+     <Curve>
+      <LineColor>15086320</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>15086320</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>false</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>Line1\Friction\p.p</VarName>
       </YCurveData>
      </Curve>
     </Curves>
@@ -1915,9 +1976,6 @@ NOTE: The electrical resistor has been changed significantly to match the hydrau
   <WriteFilename></WriteFilename>
   <DoWrite>false</DoWrite>
   <ExportVariables>
-   <ExportVariable>
-    <VariableName>time</VariableName>
-   </ExportVariable>
   </ExportVariables>
   <ImportVariables>
   </ImportVariables>

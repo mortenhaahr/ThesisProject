@@ -1,0 +1,1933 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document>
+ <Model version="5.0" build="5.0.3.12565">
+  <Sidops><![CDATA[model 128 184
+ description '<Information>
+  <Description>
+    <Version>5.0</Version>
+    <IsMainModel>0</IsMainModel>
+    <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Z:\20sim-equivalents\pipe_analogy.emx</LibraryPath>
+    <TimeStamp>2023-10-24 02:54:45</TimeStamp>
+  </Description>
+</Information>';
+ type Mainmodel
+ end;
+ implementation bg
+  submodels
+   Capacitor 160 272
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Capacitor.emx</LibraryPath>
+  <TimeStamp>2007-10-9 17:13:27</TimeStamp>
+</Description>';
+    type Capacitor
+     ports
+      electric delta in p;
+     restrictions
+      causality preferred out p;
+    end;
+    icon ipm bottom
+     figures
+      line 160 248 160 269 color 0;
+      line 170.7 269.3 149.3 269.3 color 0;
+      line 170.7 274.7 149.3 274.7 color 0;
+      line 160 274.5 160 296 color 0;
+     terminals
+      p high 160 247;
+      p low 160 297;
+    end;
+    implementation eq
+parameters
+	real C = 1.23287  {F};		// capacitance
+equations
+	// p.i = C * ddt(p.u);
+	p.u = 1/C * int(p.i);
+	
+    implementation_end;
+   Capacitor1 360 272
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Capacitor.emx</LibraryPath>
+  <TimeStamp>2007-10-9 17:13:27</TimeStamp>
+</Description>';
+    type Capacitor
+     ports
+      electric delta in p;
+     restrictions
+      causality preferred out p;
+    end;
+    icon ipm bottom
+     figures
+      line 360 248 360 269 color 0;
+      line 370.7 269.3 349.3 269.3 color 0;
+      line 370.7 274.7 349.3 274.7 color 0;
+      line 360 274.5 360 296 color 0;
+     terminals
+      p high 360 247;
+      p low 360 297;
+    end;
+    implementation eq
+parameters
+	real C = 1.23287  {F};		// capacitance
+equations
+	// p.i = C * ddt(p.u);
+	p.u = 1/C * int(p.i);
+	
+    implementation_end;
+   FluidProperties 240 48
+			specifications active 'Water'
+				specification 'default'
+description '<Information>
+  <Description>
+    <Version>4.9</Version>
+    <LibraryPath>Iconic Diagrams\Hydraulics\Fluids\FluidProperties.emx</LibraryPath>
+    <TimeStamp>2021-12-13 16:38:50</TimeStamp>
+    <IsMainModel>1</IsMainModel>
+    <KeepParameterValues>True</KeepParameterValues>
+    <AllowLibraryUpdate>True</AllowLibraryUpdate>
+    <ModelVersion>
+      <MajorVersion>1</MajorVersion>
+      <MinorVersion>0</MinorVersion>
+      <PatchVersion>0</PatchVersion>
+    </ModelVersion>
+    <Description>1.0.0 First version of the fluid properties model</Description>
+    <Author>C. Klejin</Author>
+    <Company>Controllab Products B.V.</Company>
+  </Description>
+</Information>';
+ type FluidProperties
+ end;
+ icon bg bottom
+  figures
+   rectangle 104 64 200 96 color 0 fill 16757632;
+   text 'Fluid Properties' 152 73 color 0 16;
+   text 'default' 150 86 color 0 16;
+ end;
+ implementation eq
+//----------------------------------------------------------------------------------------------
+// Default hydraulic fluid
+// (all properties defined at 50 degC) 
+//----------------------------------------------------------------------------------------------
+parameters
+	real oneup kin_viscosity  (range= <0,>) = 2.7e-5 {m2/s};	// kinematic viscosity
+	real oneup rho (range= <0,>) = 865.0 {kg/m3};						// density
+	real oneup B (range= <0,>) = 1.6e9 {Pa};								// effective bulk modulus
+	real oneup p_vapour (range= <-1e5,>) = -99900.0 {Pa};		// vapour presure
+implementation_end;
+specification_end;
+				specification 'Diesel'
+description '<Information>
+  <Description>
+    <Version>4.9</Version>
+    <LibraryPath>Iconic Diagrams\Hydraulics\Fluids\FluidProperties.emx</LibraryPath>
+    <TimeStamp>2021-12-13 16:38:39</TimeStamp>
+    <IsMainModel>1</IsMainModel>
+    <KeepParameterValues>True</KeepParameterValues>
+    <AllowLibraryUpdate>True</AllowLibraryUpdate>
+    <ModelVersion>
+      <MajorVersion>1</MajorVersion>
+      <MinorVersion>0</MinorVersion>
+      <PatchVersion>0</PatchVersion>
+    </ModelVersion>
+    <Description>1.0.0 First version of the fluid properties model</Description>
+    <Author>C. Klejin</Author>
+    <Company>Controllab Products B.V.</Company>
+  </Description>
+</Information>';
+ type FluidProperties
+ end;
+ icon bg bottom
+  figures
+   rectangle 104 64 200 96 color 0 fill 16757632;
+   text 'Fluid Properties' 152 73 color 0 16;
+   text 'Diesel' 150 86 color 0 16;
+ end;
+ implementation eq
+//----------------------------------------------------------------------------------------------
+// Standard diesel fuel
+// (all properties defined at 50 degC) 
+//----------------------------------------------------------------------------------------------
+parameters
+	real oneup kin_viscosity  (range= <0,>) = 2.5e-6 {m2/s};		// kinematic viscosity
+	real oneup rho (range= <0,>) = 830.0 {kg/m3};							// density
+	real oneup B (range= <0,>) = 1.48e9 {Pa};						// effective bulk modulus
+	real oneup p_vapour (range= <-1e5,>) = -99900.0 {Pa};		// vapour presure
+implementation_end;
+specification_end;
+				specification 'Gasoline'
+description '<Information>
+ <Description>
+    <Version>4.9</Version>
+  <LibraryPath>Iconic Diagrams\Hydraulics\Fluids\FluidProperties.emx</LibraryPath>
+  <TimeStamp>2021-8-31 12:25:54</TimeStamp>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>True</KeepParameterValues>
+  <AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <ModelVersion>
+   <MajorVersion>1</MajorVersion>
+   <MinorVersion>0</MinorVersion>
+   <PatchVersion>0</PatchVersion>
+  </ModelVersion>
+  <Description>1.0.0 First version of the fluid properties model</Description>
+  <Author>C. Klejin</Author>
+  <Company>Controllab Products B.V.</Company>
+ </Description>
+</Information>';
+ type FluidProperties
+ end;
+ icon bg bottom
+  figures
+   rectangle 264 272 360 304 color 0 fill 16757632;
+   text 'Fluid Properties' 312 281 color 0 16;
+   text 'Gasoline' 310 294 color 0 16;
+ end;
+ implementation eq
+//----------------------------------------------------------------------------------------------
+// Standard RON95 gasoline
+// (all properties defined at 50 degC) 
+//----------------------------------------------------------------------------------------------
+parameters
+	real oneup kin_viscosity  (range= <0,>) = 0.7e-6 {m2/s};		// kinematic viscosity
+	real oneup rho (range= <0,>) = 748.1 {kg/m3};							// density
+	real oneup B (range= <0,>) = 1.3e9 {Pa};						// effective bulk modulus
+	real oneup p_vapour (range= <-1e5,>) = -99900.0 {Pa};		// vapour presure
+implementation_end;
+specification_end;
+				specification 'ISOVG100'
+description '<Information>
+ <Description>
+    <Version>4.9</Version>
+  <LibraryPath>Iconic Diagrams\Hydraulics\Fluids\FluidProperties.emx</LibraryPath>
+  <TimeStamp>2021-8-31 12:25:54</TimeStamp>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>True</KeepParameterValues>
+  <AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <ModelVersion>
+   <MajorVersion>1</MajorVersion>
+   <MinorVersion>0</MinorVersion>
+   <PatchVersion>0</PatchVersion>
+  </ModelVersion>
+  <Description>1.0.0 First version of the fluid properties model</Description>
+  <Author>C. Klejin</Author>
+  <Company>Controllab Products B.V.</Company>
+ </Description>
+</Information>';
+ type FluidProperties
+ end;
+ icon bg bottom
+  figures
+   rectangle 264 272 360 304 color 0 fill 16757632;
+   text 'Fluid Properties' 312 281 color 0 16;
+   text 'ISO VG 100' 312 294 color 0 16;
+ end;
+ implementation eq
+//----------------------------------------------------------------------------------------------
+// ISO VG 100 Hydraulic fluid, generally used for industrial machinery with heavy loads
+// (all properties defined at 50 degC) 
+//----------------------------------------------------------------------------------------------
+parameters
+	real oneup kin_viscosity  (range= <0,>) = 60.9e-6 {m2/s};		// kinematic viscosity
+	real oneup rho (range= <0,>) = 859.6 {kg/m3};							// density
+	real oneup B (range= <0,>) = 1.8e9 {Pa};						// effective bulk modulus
+	real oneup p_vapour (range= <-1e5,>) = -99900.0 {Pa};		// vapour presure
+implementation_end;
+specification_end;
+				specification 'ISOVG150'
+description '<Information>
+ <Description>
+    <Version>4.9</Version>
+  <LibraryPath>Iconic Diagrams\Hydraulics\Fluids\FluidProperties.emx</LibraryPath>
+  <TimeStamp>2021-8-31 12:25:54</TimeStamp>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>True</KeepParameterValues>
+  <AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <ModelVersion>
+   <MajorVersion>1</MajorVersion>
+   <MinorVersion>0</MinorVersion>
+   <PatchVersion>0</PatchVersion>
+  </ModelVersion>
+  <Description>1.0.0 First version of the fluid properties model</Description>
+  <Author>C. Klejin</Author>
+  <Company>Controllab Products B.V.</Company>
+ </Description>
+</Information>';
+ type FluidProperties
+ end;
+ icon bg bottom
+  figures
+   rectangle 264 272 360 304 color 0 fill 16757632;
+   text 'Fluid Properties' 312 281 color 0 16;
+   text 'ISO VG 150' 312 294 color 0 16;
+ end;
+ implementation eq
+//----------------------------------------------------------------------------------------------
+// ISO VG 150 Oil for lubrication of high pressure systems
+// (all properties defined at 50 degC) 
+//----------------------------------------------------------------------------------------------
+parameters
+	real oneup kin_viscosity  (range= <0,>) = 89e-6 {m2/s};		// kinematic viscosity
+	real oneup rho (range= <0,>) = 859.6 {kg/m3};							// density
+	real oneup B (range= <0,>) = 1.8e9 {Pa};						// effective bulk modulus
+	real oneup p_vapour (range= <-1e5,>) = -99900.0 {Pa};		// vapour presure
+implementation_end;
+specification_end;
+				specification 'ISOVG22'
+description '<Information>
+ <Description>
+    <Version>4.9</Version>
+  <LibraryPath>Iconic Diagrams\Hydraulics\Fluids\FluidProperties.emx</LibraryPath>
+  <TimeStamp>2021-8-31 12:25:54</TimeStamp>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>True</KeepParameterValues>
+  <AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <ModelVersion>
+   <MajorVersion>1</MajorVersion>
+   <MinorVersion>0</MinorVersion>
+   <PatchVersion>0</PatchVersion>
+  </ModelVersion>
+  <Description>1.0.0 First version of the fluid properties model</Description>
+  <Author>C. Klejin</Author>
+  <Company>Controllab Products B.V.</Company>
+ </Description>
+</Information>';
+ type FluidProperties
+ end;
+ icon bg bottom
+  figures
+   rectangle 400 256 496 288 color 0 fill 16757632;
+   text 'Fluid Properties' 448 265 color 0 16;
+   text 'ISO VG 22' 448 278 color 0 16;
+ end;
+ implementation eq
+//----------------------------------------------------------------------------------------------
+// ISO VG 22 Hydraulic fluid, generally used for airlines for air tools etc.
+// (all properties defined at 50 degC) 
+//----------------------------------------------------------------------------------------------
+parameters
+	real oneup kin_viscosity  (range= <0,>) = 15.3e-6 {m2/s};		// kinematic viscosity
+	real oneup rho (range= <0,>) = 841.6 {kg/m3};							// density
+	real oneup B (range= <0,>) = 1.8e9 {Pa};						// effective bulk modulus
+	real oneup p_vapour (range= <-1e5,>) = -0.999e5 {Pa};		// vapour presure
+implementation_end;
+specification_end;
+				specification 'ISOVG32'
+description '<Information>
+ <Description>
+    <Version>4.9</Version>
+  <LibraryPath>Iconic Diagrams\Hydraulics\Fluids\FluidProperties.emx</LibraryPath>
+  <TimeStamp>2021-8-31 12:25:54</TimeStamp>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>True</KeepParameterValues>
+  <AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <ModelVersion>
+   <MajorVersion>1</MajorVersion>
+   <MinorVersion>0</MinorVersion>
+   <PatchVersion>0</PatchVersion>
+  </ModelVersion>
+  <Description>1.0.0 First version of the fluid properties model</Description>
+  <Author>C. Klejin</Author>
+  <Company>Controllab Products B.V.</Company>
+ </Description>
+</Information>';
+ type FluidProperties
+ end;
+ icon bg bottom
+  figures
+   rectangle 400 256 496 288 color 0 fill 16757632;
+   text 'Fluid Properties' 448 265 color 0 16;
+   text 'ISO VG 32' 448 278 color 0 16;
+ end;
+ implementation eq
+//----------------------------------------------------------------------------------------------
+// ISO VG 32 Hydraulic fluid, generally used for high-powered machine tools
+// (all properties defined at 50 degC) 
+//----------------------------------------------------------------------------------------------
+parameters
+	real oneup kin_viscosity  (range= <0,>) = 21.4e-6 {m2/s};		// kinematic viscosity
+	real oneup rho (range= <0,>) = 834.6 {kg/m3};							// density
+	real oneup B (range= <0,>) = 1.8e9 {Pa};						// effective bulk modulus
+	real oneup p_vapour (range= <-1e5,>) = -0.999e5 {Pa};		// vapour presure
+implementation_end;
+specification_end;
+				specification 'ISOVG46'
+description '<Information>
+ <Description>
+    <Version>4.9</Version>
+  <LibraryPath>Iconic Diagrams\Hydraulics\Fluids\FluidProperties.emx</LibraryPath>
+  <TimeStamp>2021-8-31 12:25:54</TimeStamp>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>True</KeepParameterValues>
+  <AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <ModelVersion>
+   <MajorVersion>1</MajorVersion>
+   <MinorVersion>0</MinorVersion>
+   <PatchVersion>0</PatchVersion>
+  </ModelVersion>
+  <Description>1.0.0 First version of the fluid properties model</Description>
+  <Author>C. Klejin</Author>
+  <Company>Controllab Products B.V.</Company>
+ </Description>
+</Information>';
+ type FluidProperties
+ end;
+ icon bg bottom
+  figures
+   rectangle 400 256 496 288 color 0 fill 16757632;
+   text 'Fluid Properties' 448 265 color 0 16;
+   text 'ISO VG 46' 448 278 color 0 16;
+ end;
+ implementation eq
+//----------------------------------------------------------------------------------------------
+// ISO VG 46 Hydraulic fluid, generally used for systems with a large load carrying capacity
+// (all properties defined at 50 degC) 
+//----------------------------------------------------------------------------------------------
+parameters
+	real oneup kin_viscosity  (range= <0,>) = 30.1e-6 {m2/s};		// kinematic viscosity
+	real oneup rho (range= <0,>) = 848.6 {kg/m3};							// density
+	real oneup B (range= <0,>) = 1.8e9 {Pa};						// effective bulk modulus
+	real oneup p_vapour (range= <-1e5,>) = -0.999e5 {Pa};		// vapour presure
+implementation_end;
+specification_end;
+				specification 'ISOVG68'
+description '<Information>
+ <Description>
+    <Version>4.9</Version>
+  <LibraryPath>Iconic Diagrams\Hydraulics\Fluids\FluidProperties.emx</LibraryPath>
+  <TimeStamp>2021-8-31 12:25:54</TimeStamp>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>True</KeepParameterValues>
+  <AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <ModelVersion>
+   <MajorVersion>1</MajorVersion>
+   <MinorVersion>0</MinorVersion>
+   <PatchVersion>0</PatchVersion>
+  </ModelVersion>
+  <Description>1.0.0 First version of the fluid properties model</Description>
+  <Author>C. Klejin</Author>
+  <Company>Controllab Products B.V.</Company>
+ </Description>
+</Information>';
+ type FluidProperties
+ end;
+ icon bg bottom
+  figures
+   rectangle 400 256 496 288 color 0 fill 16757632;
+   text 'Fluid Properties' 448 265 color 0 16;
+   text 'ISO VG 68' 448 278 color 0 16;
+ end;
+ implementation eq
+//----------------------------------------------------------------------------------------------
+// ISO VG 68 Hydraulic fluid, generally used for industrial plants working under high-pressure etc
+// (all properties defined at 50 degC) 
+//----------------------------------------------------------------------------------------------
+parameters
+	real oneup kin_viscosity  (range= <0,>) = 42.9e-6 {m2/s};		// kinematic viscosity
+	real oneup rho (range= <0,>) = 857.6 {kg/m3};						// density
+	real oneup B (range= <0,>) = 1.8e9 {Pa};								// effective bulk modulus
+	real oneup p_vapour (range= <-1e5,>) = -0.999e5 {Pa};				// vapour presure
+implementation_end;
+specification_end;
+				specification 'Kerosene'
+description '<Information>
+ <Description>
+    <Version>4.9</Version>
+  <LibraryPath>Iconic Diagrams\Hydraulics\Fluids\FluidProperties.emx</LibraryPath>
+  <TimeStamp>2021-8-31 12:25:54</TimeStamp>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>True</KeepParameterValues>
+  <AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <ModelVersion>
+   <MajorVersion>1</MajorVersion>
+   <MinorVersion>0</MinorVersion>
+   <PatchVersion>0</PatchVersion>
+  </ModelVersion>
+  <Description>1.0.0 First version of the fluid properties model</Description>
+  <Author>C. Klejin</Author>
+  <Company>Controllab Products B.V.</Company>
+ </Description>
+</Information>';
+ type FluidProperties
+ end;
+ icon bg bottom
+  figures
+   rectangle 400 256 496 288 color 0 fill 16757632;
+   text 'Fluid Properties' 448 265 color 0 16;
+   text 'Kerosene' 448 278 color 0 16;
+ end;
+ implementation eq
+//----------------------------------------------------------------------------------------------
+// Kerosene: Regular aviation fuel
+// (all properties defined at 50 degC) 
+//----------------------------------------------------------------------------------------------
+parameters
+	real oneup kin_viscosity  (range= <0,>) = 1.7e-6 {m2/s};		// kinematic viscosity
+	real oneup rho (range= <0,>) = 776.2 {kg/m3};						// density
+	real oneup B (range= <0,>) = 1.48e9 {Pa};								// effective bulk modulus
+	real oneup p_vapour (range= <-1e5,>) = -0.999e5 {Pa};				// vapour presure
+implementation_end;
+specification_end;
+				specification 'SAE10W30'
+description '<Information>
+ <Description>
+    <Version>4.9</Version>
+  <LibraryPath>Iconic Diagrams\Hydraulics\Fluids\FluidProperties.emx</LibraryPath>
+  <TimeStamp>2021-8-31 12:25:54</TimeStamp>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>True</KeepParameterValues>
+  <AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <ModelVersion>
+   <MajorVersion>1</MajorVersion>
+   <MinorVersion>0</MinorVersion>
+   <PatchVersion>0</PatchVersion>
+  </ModelVersion>
+  <Description>1.0.0 First version of the fluid properties model</Description>
+  <Author>C. Klejin</Author>
+  <Company>Controllab Products B.V.</Company>
+ </Description>
+</Information>';
+ type FluidProperties
+ end;
+ icon bg bottom
+  figures
+   rectangle 400 256 496 288 color 0 fill 16757632;
+   text 'Fluid Properties' 448 265 color 0 16;
+   text 'SAE 10W-30' 448 278 color 0 16;
+ end;
+ implementation eq
+//----------------------------------------------------------------------------------------------
+// SAE 10W-30 Automotive crankcase oil
+// (all properties defined at 50 degC) 
+//----------------------------------------------------------------------------------------------
+parameters
+	real oneup kin_viscosity  (range= <0,>) = 48.6e-6 {m2/s};		// kinematic viscosity
+	real oneup rho (range= <0,>) = 857.3 {kg/m3};							// density
+	real oneup B (range= <0,>) = 1.3e9 {Pa};						// effective bulk modulus
+	real oneup p_vapour (range= <-1e5,>) = -0.999e5 {Pa};		// vapour presure
+implementation_end;
+specification_end;
+				specification 'SAE10W40'
+description '<Information>
+ <Description>
+    <Version>4.9</Version>
+  <LibraryPath>Iconic Diagrams\Hydraulics\Fluids\FluidProperties.emx</LibraryPath>
+  <TimeStamp>2021-8-31 12:25:54</TimeStamp>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>True</KeepParameterValues>
+  <AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <ModelVersion>
+   <MajorVersion>1</MajorVersion>
+   <MinorVersion>0</MinorVersion>
+   <PatchVersion>0</PatchVersion>
+  </ModelVersion>
+  <Description>1.0.0 First version of the fluid properties model</Description>
+  <Author>C. Klejin</Author>
+  <Company>Controllab Products B.V.</Company>
+ </Description>
+</Information>';
+ type FluidProperties
+ end;
+ icon bg bottom
+  figures
+   rectangle 400 256 496 288 color 0 fill 16757632;
+   text 'Fluid Properties' 448 265 color 0 16;
+   text 'SAE 10W-40' 448 278 color 0 16;
+ end;
+ implementation eq
+//----------------------------------------------------------------------------------------------
+// SAE 10W-40 Automotive crankcase oil
+// (all properties defined at 50 degC) 
+//----------------------------------------------------------------------------------------------
+parameters
+	real oneup kin_viscosity  (range= <0,>) = 66.3e-6 {m2/s};		// kinematic viscosity
+	real oneup rho (range= <0,>) = 846.5 {kg/m3};							// density
+	real oneup B (range= <0,>) = 1.3e9 {Pa};						// effective bulk modulus
+	real oneup p_vapour (range= <-1e5,>) = -0.999e5 {Pa};		// vapour presure
+implementation_end;
+specification_end;
+				specification 'SAE15W40'
+description '<Information>
+ <Description>
+    <Version>4.9</Version>
+  <LibraryPath>Iconic Diagrams\Hydraulics\Fluids\FluidProperties.emx</LibraryPath>
+  <TimeStamp>2021-8-31 12:25:54</TimeStamp>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>True</KeepParameterValues>
+  <AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <ModelVersion>
+   <MajorVersion>1</MajorVersion>
+   <MinorVersion>0</MinorVersion>
+   <PatchVersion>0</PatchVersion>
+  </ModelVersion>
+  <Description>1.0.0 First version of the fluid properties model</Description>
+  <Author>C. Klejin</Author>
+  <Company>Controllab Products B.V.</Company>
+ </Description>
+</Information>';
+ type FluidProperties
+ end;
+ icon bg bottom
+  figures
+   rectangle 472 16 568 48 color 0 fill 16757632;
+   text 'Fluid Properties' 520 25 color 0 16;
+   text 'SAE 15W-40' 520 38 color 0 16;
+ end;
+ implementation eq
+//----------------------------------------------------------------------------------------------
+// SAE 15W-40 Automotive crankcase oil
+// (all properties defined at 50 degC) 
+//----------------------------------------------------------------------------------------------
+parameters
+	real oneup kin_viscosity  (range= <0,>) = 67.1e-6 {m2/s};		// kinematic viscosity
+	real oneup rho (range= <0,>) = 860.1 {kg/m3};						// density
+	real oneup B (range= <0,>) = 1.3e9 {Pa};								// effective bulk modulus
+	real oneup p_vapour (range= <-1e5,>) = -0.999e5 {Pa};				// vapour presure
+implementation_end;
+specification_end;
+				specification 'SAE75W140'
+description '<Information>
+ <Description>
+    <Version>4.9</Version>
+  <LibraryPath>Iconic Diagrams\Hydraulics\Fluids\FluidProperties.emx</LibraryPath>
+  <TimeStamp>2021-8-31 12:25:54</TimeStamp>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>True</KeepParameterValues>
+  <AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <ModelVersion>
+   <MajorVersion>1</MajorVersion>
+   <MinorVersion>0</MinorVersion>
+   <PatchVersion>0</PatchVersion>
+  </ModelVersion>
+  <Description>1.0.0 First version of the fluid properties model</Description>
+  <Author>C. Klejin</Author>
+  <Company>Controllab Products B.V.</Company>
+ </Description>
+</Information>';
+ type FluidProperties
+ end;
+ icon bg bottom
+  figures
+   rectangle 472 16 568 48 color 0 fill 16757632;
+   text 'Fluid Properties' 520 25 color 0 16;
+   text 'SAE 75W-140' 520 38 color 0 16;
+ end;
+ implementation eq
+//----------------------------------------------------------------------------------------------
+// SAE 75W-140 Automotive gear oil
+// (all properties defined at 50 degC) 
+//----------------------------------------------------------------------------------------------
+parameters
+	real oneup kin_viscosity  (range= <0,>) = 114e-6 {m2/s};		// kinematic viscosity
+	real oneup rho (range= <0,>) = 833.4 {kg/m3};						// density
+	real oneup B (range= <0,>) = 1.3e9 {Pa};								// effective bulk modulus
+	real oneup p_vapour (range= <-1e5,>) = -0.999e5 {Pa};				// vapour presure
+implementation_end;
+specification_end;
+				specification 'SeaWater'
+description '<Information>
+ <Description>
+    <Version>4.9</Version>
+  <LibraryPath>Iconic Diagrams\Hydraulics\Fluids\FluidProperties.emx</LibraryPath>
+  <TimeStamp>2021-8-31 12:25:54</TimeStamp>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>True</KeepParameterValues>
+  <AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <ModelVersion>
+   <MajorVersion>1</MajorVersion>
+   <MinorVersion>0</MinorVersion>
+   <PatchVersion>0</PatchVersion>
+  </ModelVersion>
+  <Description>1.0.0 First version of the fluid properties model</Description>
+  <Author>C. Klejin</Author>
+  <Company>Controllab Products B.V.</Company>
+ </Description>
+</Information>';
+ type FluidProperties
+ end;
+ icon bg bottom
+  figures
+   rectangle 472 16 568 48 color 0 fill 16757632;
+   text 'Fluid Properties' 520 25 color 0 16;
+   text 'Sea Water' 518 38 color 0 16;
+ end;
+ implementation eq
+//----------------------------------------------------------------------------------------------
+// Sea water with a salinity of 35 g/l
+// (all properties defined at 50 degC) 
+//----------------------------------------------------------------------------------------------
+parameters
+	real oneup kin_viscosity  (range= <0,>) = 0.6e-6 {m2/s};			// kinematic viscosity
+	real oneup rho (range= <0,>) = 1015.5 {kg/m3};							// density
+	real oneup B (range= <0,>) = 2.34e9 {Pa};						// effective bulk modulus
+	real oneup p_vapour (range= <-1e5,>) = -0.999e5 {Pa};		// vapour presure
+implementation_end;
+specification_end;
+				specification 'Skydrol500B4'
+description '<Information>
+ <Description>
+    <Version>4.9</Version>
+  <LibraryPath>Iconic Diagrams\Hydraulics\Fluids\FluidProperties.emx</LibraryPath>
+  <TimeStamp>2021-8-31 12:25:54</TimeStamp>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>True</KeepParameterValues>
+  <AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <ModelVersion>
+   <MajorVersion>1</MajorVersion>
+   <MinorVersion>0</MinorVersion>
+   <PatchVersion>0</PatchVersion>
+  </ModelVersion>
+  <Description>1.0.0 First version of the fluid properties model</Description>
+  <Author>C. Klejin</Author>
+  <Company>Controllab Products B.V.</Company>
+ </Description>
+</Information>';
+ type FluidProperties
+ end;
+ icon bg bottom
+  figures
+   rectangle 520 96 616 128 color 0 fill 16757632;
+   text 'Fluid Properties' 568 105 color 0 16;
+   text 'Skydrol 500B 4' 568 118 color 0 16;
+ end;
+ implementation eq
+//----------------------------------------------------------------------------------------------
+// Skydrol 500B 4 Hydraulic fluid for aviation applications
+// (all properties defined at 50 degC) 
+//----------------------------------------------------------------------------------------------
+parameters
+	real oneup kin_viscosity  (range= <0,>) = 8.9e-6 {m2/s};		// kinematic viscosity
+	real oneup rho (range= <0,>) = 1039.8 {kg/m3};						// density
+	real oneup B (range= <0,>) = 2.34e9 {Pa};								// effective bulk modulus
+	real oneup p_vapour (range= <-1e5,>) = -0.999e5 {Pa};				// vapour presure
+implementation_end;
+specification_end;
+				specification 'VW13'
+description '<Information>
+ <Description>
+    <Version>4.9</Version>
+  <LibraryPath>Iconic Diagrams\Hydraulics\Fluids\FluidProperties.emx</LibraryPath>
+  <TimeStamp>2021-8-31 12:25:54</TimeStamp>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>True</KeepParameterValues>
+  <AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <ModelVersion>
+   <MajorVersion>1</MajorVersion>
+   <MinorVersion>0</MinorVersion>
+   <PatchVersion>0</PatchVersion>
+  </ModelVersion>
+  <Description>1.0.0 First version of the fluid properties model</Description>
+  <Author>C. Klejin</Author>
+  <Company>Controllab Products B.V.</Company>
+ </Description>
+</Information>';
+ type FluidProperties
+ end;
+ icon bg bottom
+  figures
+   rectangle 216 328 312 360 color 0 fill 16757632;
+   text 'Fluid Properties' 264 337 color 0 16;
+   text 'VW13' 264 350 color 0 16;
+ end;
+ implementation eq
+//----------------------------------------------------------------------------------------------
+// VW13 Anti-freeze, 50-50% water glycerine
+// (all properties defined at 50 degC) 
+//----------------------------------------------------------------------------------------------
+parameters
+	real oneup kin_viscosity  (range= <0,>) = 1.9e-6 {m2/s};		// kinematic viscosity
+	real oneup rho (range= <0,>) = 1063.5 {kg/m3};						// density
+	real oneup B (range= <0,>) = 3.4e9 {Pa};								// effective bulk modulus
+	real oneup p_vapour (range= <-1e5,>) = -0.999e5 {Pa};				// vapour presure
+implementation_end;
+specification_end;
+				specification 'Water'
+ description '<Information>
+ <Description>
+    <Version>4.9</Version>
+  <LibraryPath>Iconic Diagrams\Hydraulics\Fluids\FluidProperties.emx</LibraryPath>
+  <TimeStamp>2021-8-31 12:25:54</TimeStamp>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>True</KeepParameterValues>
+  <AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <ModelVersion>
+   <MajorVersion>1</MajorVersion>
+   <MinorVersion>0</MinorVersion>
+   <PatchVersion>0</PatchVersion>
+  </ModelVersion>
+  <Description>1.0.0 First version of the fluid properties model</Description>
+  <Author>C. Klejin</Author>
+  <Company>Controllab Products B.V.</Company>
+ </Description>
+</Information>';
+ type FluidProperties
+ end;
+ icon bg bottom
+  figures
+   rectangle 192 32 288 64 color 0 fill 16757632;
+   text 'Fluid Properties' 240 41 color 0 16;
+   text 'Water' 238 54 color 0 16;
+ end;
+ implementation eq
+//----------------------------------------------------------------------------------------------
+// Pure water
+// (all properties defined at 50 degC) 
+//----------------------------------------------------------------------------------------------
+parameters
+	real oneup kin_viscosity  (range= <0,>) = 0.5e-6 {m2/s};			// kinematic viscosity
+	real oneup rho (range= <0,>) = 988.05 {kg/m3};							// density
+	real oneup B (range= <0,>) = 2.15e9 {Pa};						// effective bulk modulus
+	real oneup p_vapour (range= <-1e5,>) = -0.999e5 {Pa};		// vapour presure
+implementation_end;
+specification_end;
+			end;
+   Ground 80 336
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Ground.emx</LibraryPath>
+  <TimeStamp>2007-9-25 11:57:33</TimeStamp>
+</Description>';
+    type Ground
+     ports
+      electric psi duplicatable in p;
+     restrictions
+      causality fixed out p;
+    end;
+    icon ipm bottom
+     figures
+      line 72 336 88 336 color 0;
+      line 74.7 340.3 85.3 340.3 color 0;
+      line 77.3 344 82.7 344 color 0;
+      line 80 328 80 336 color 0;
+     terminals
+      p 80 328 fixed;
+      p 80 328 fixed;
+      p 80 328 fixed;
+    end;
+    implementation eq
+equations
+	p.u = 0;
+ implementation_end;
+   Ground1 360 336
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Ground.emx</LibraryPath>
+  <TimeStamp>2007-9-25 11:57:33</TimeStamp>
+</Description>';
+    type Ground
+     ports
+      electric psi duplicatable in p;
+     restrictions
+      causality fixed out p;
+    end;
+    icon ipm bottom
+     figures
+      line 352 336 368 336 color 0;
+      line 354.7 340.3 365.3 340.3 color 0;
+      line 357.3 344 362.7 344 color 0;
+      line 360 328 360 336 color 0;
+     terminals
+      p 360 328 fixed;
+      p 360 328 fixed;
+      p 360 328 fixed;
+    end;
+    implementation eq
+equations
+	p.u = 0;
+ implementation_end;
+   Ground2 424 336
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Ground.emx</LibraryPath>
+  <TimeStamp>2007-9-25 11:57:33</TimeStamp>
+</Description>';
+    type Ground
+     ports
+      electric psi duplicatable in p;
+     restrictions
+      causality fixed out p;
+    end;
+    icon ipm bottom
+     figures
+      line 416 336 432 336 color 0;
+      line 418.7 340.3 429.3 340.3 color 0;
+      line 421.3 344 426.7 344 color 0;
+      line 424 328 424 336 color 0;
+     terminals
+      p 424 328 fixed;
+      p 424 328 fixed;
+      p 424 328 fixed;
+    end;
+    implementation eq
+equations
+	p.u = 0;
+ implementation_end;
+   Ground3 160 336
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Ground.emx</LibraryPath>
+  <TimeStamp>2007-9-25 11:57:33</TimeStamp>
+</Description>';
+    type Ground
+     ports
+      electric psi duplicatable in p;
+     restrictions
+      causality fixed out p;
+    end;
+    icon ipm bottom
+     figures
+      line 152 336 168 336 color 0;
+      line 154.7 340.3 165.3 340.3 color 0;
+      line 157.3 344 162.7 344 color 0;
+      line 160 328 160 336 color 0;
+     terminals
+      p 160 328 fixed;
+      p 160 328 fixed;
+      p 160 328 fixed;
+    end;
+    implementation eq
+equations
+	p.u = 0;
+ implementation_end;
+   Inductor 288 216
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Inductor.emx</LibraryPath>
+  <TimeStamp>2007-9-25 11:57:43</TimeStamp>
+</Description>';
+    type Inductor
+     ports
+      electric delta in p;
+     restrictions
+      causality preferred in p;
+    end;
+    icon ipm ellipse bottom
+     figures
+      ellipse 282.1 208 294.9 223.5 color 0;
+      ellipse 294.9 208 307.7 223.5 color 0;
+      ellipse 269.3 208 282.1 223.5 color 0;
+      rectangle 269.3 217.1 307.7 224 color 16777215 fill 16777215;
+      line 264 216 269.3 216 color 0;
+      line 306.7 216 312 216 color 0;
+     terminals
+      p high 264 216 fixed;
+      p low 312 216 fixed;
+    end;
+    implementation eq
+parameters
+	real L = 20128389  {H};			// inductance
+equations
+	//p.u = L * ddt(p.i);
+   p.i = 1/L * int(p.u); implementation_end;
+   Line1 240 120
+			specifications active 'Default'
+				specification 'Default'
+ description '<Information>
+  <Description>
+    <Version>4.9</Version>
+    <IsMainModel>1</IsMainModel>
+    <KeepParameterValues>False</KeepParameterValues>
+    <AllowLibraryUpdate>True</AllowLibraryUpdate>
+    <ModelVersion>
+      <MajorVersion>2</MajorVersion>
+      <MinorVersion>0</MinorVersion>
+      <PatchVersion>0</PatchVersion>
+    </ModelVersion>
+    <Description>1.0.0 First version of the line model
+2.0.0.Model adapted to work with general fluid properties model</Description>
+    <Author>C. Kleijn</Author>
+    <Company>Controllab Products</Company>
+    <LibraryPath>Iconic Diagrams\Hydraulics\Components\Line_.emx</LibraryPath>
+    <TimeStamp>2022-3-25 12:49:03</TimeStamp>
+  </Description>
+  <Attributes>
+    <GlobalRelations>parameters
+	real L = 10.0 {m}; 								// line length
+	real D = 0.025 {m};								// line inner diameter
+	real th = 0.004 {m};							// wall thickness
+	real E = 2.1e11 {N/m2};						// modulus of elasticity</GlobalRelations>
+  </Attributes>
+</Information>';
+ type Line
+  ports
+   hydraulic psi in p_in;
+   hydraulic psi out p_out;
+  restrictions
+   causality preferred out p_in;
+   causality preferred out p_out;
+ end;
+ icon bg bottom
+  figures
+   rectangle 208 112 272 128 color -1 fill 14671839;
+   line 208 112 272 112 color 0 fill 14671839;
+   line 208 128 272 128 color 0 fill 14671839;
+  terminals
+   p_in 208 120 fixed;
+   p_out 272 120 fixed;
+ end;
+ implementation bg
+  submodels
+   Friction 408 192
+    description '<Information><Description><Version>4.9</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath></LibraryPath><TimeStamp>2021-8-31 12:13:50</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate></Description></Information>';
+    type LaminarResistance
+     ports
+      hydraulic delta in p;
+     restrictions
+      causality fixed out p;
+    end;
+    icon bg bottom
+     figures
+      spline 396.8 198.4 408 195.2 419.2 198.4 color 0;
+      spline 396.8 185.6 408 188.8 419.2 185.6 color 0;
+      line 392 192 424 192 color 0;
+     terminals
+      p high 392 192 fixed;
+      p low 424 192 fixed;
+    end;
+    implementation eq
+parameters
+	real global L {m}; 				// line length
+	real global D {m};				// line inner diameter
+	real global rho {kg/m3};	// density
+	real global kin_viscosity {m2/s};	// kinematic viscosity
+variables
+	real A {m2};						// line cross sectional area
+	real Re;								// Reynolds number
+	real Rl;								// line resistance
+	real vl {m/s};						// average flow velocity
+initialequations
+	A = 0.25 * pi * D^2;
+equations
+	vl = p.phi/A;
+	Re = (abs(p.phi) * D) / (A * kin_viscosity);
+	Rl = if Re <= 1404 then
+			128 * L * rho * kin_viscosity / (pi * D^4)
+		else if Re <= 2320
+			then
+				0.0456 * rho * L /(2 * D * A^2) * abs(p.phi)
+			else
+				(0.3164 / Re^0.25) * rho * L /(2 * D * A^2) * abs(p.phi)
+			end
+		end;
+	p.p = Rl*p.phi;implementation_end;
+   HydraulicInertia 296 192.9
+			specifications active 'default'
+				specification 'default'
+ description '<Information><Description><Version>4.9</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath></LibraryPath><TimeStamp>2021-8-31 12:13:50</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate></Description></Information>';
+ type HydraulicInertia
+  ports
+   hydraulic psi in pa;
+   hydraulic psi out pb;
+  restrictions
+   causality fixed in pb;
+   causality fixed in pa;
+ end;
+ icon bg bottom
+  figures
+   line 272 192 320 192 color 0;
+   rectangle 288 184.9 304 200.9 color 0 fill 9211020;
+  terminals
+   pa 272 192 fixed;
+   pb 320 192 fixed;
+ end;
+ implementation eq
+parameters
+	real global L {m}; 				// line length
+	real global D {m};				// line inner diameter
+	real global p_vapour {Pa};	// vapour presure
+	real global rho {kg/m3};	// density
+variables
+	real hidden A {m2};				// line cross sectional area
+	real I;									// hydraulic inertia
+	real hidden pa_lim, pb_lim {Pa};
+	real hidden dp {Pa};
+initialequations
+	A = pi*D^2/4;
+	I = rho*L/A;
+equations
+	pa_lim = if pa.p < p_vapour then p_vapour else pa.p end;
+	pb_lim = if pb.p < p_vapour then p_vapour else pb.p end;
+	dp = pa_lim - pb_lim;
+	pa.phi = (1/I)*int(dp);
+	pb.phi = pa.phi;
+
+  
+implementation_end;
+specification_end;
+			end;
+   plug p_in 48 192;
+   plug p_out 680 192;
+   Node1 167.9 191.9
+    description '<Description><Version>4.0</Version>
+   <LibraryPath>System\Node.emx</LibraryPath>
+  <TimeStamp>2007-10-31 11:27:14</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+    knot Node
+     ports
+      hydraulic knot psi duplicatable none p [1];
+    end;
+    icon bg ellipse
+     figures
+      ellipse 164.8 188.8 171.2 195.2 color -1 fill 0;
+      ellipse 163.7 187.7 172.2 196.2 color -1;
+     terminals
+      p 168 192 fixed;
+      p 168 192 fixed;
+      p 168 192 fixed;
+      p 168 192 fixed;
+    end;
+    implementation eq
+equations
+	sum (direct (p.t)) = 0;
+	equal (collect (p.a));
+  implementation_end;
+   Node2 527.9 191.9
+    description '<Description><Version>4.0</Version>
+   <LibraryPath>System\Node.emx</LibraryPath>
+  <TimeStamp>2007-10-31 11:27:14</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+    knot Node
+     ports
+      hydraulic knot psi duplicatable none p [1];
+    end;
+    icon bg ellipse
+     figures
+      ellipse 524.8 188.8 531.2 195.2 color -1 fill 0;
+      ellipse 523.7 187.7 532.2 196.2 color -1;
+     terminals
+      p 528 192 fixed;
+      p 528 192 fixed;
+      p 528 192 fixed;
+      p 528 192 fixed;
+    end;
+    implementation eq
+equations
+	sum (direct (p.t)) = 0;
+	equal (collect (p.a));
+  implementation_end;
+   Volume_left 168 96.5
+    description '<Information><Description><Version>4.9</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath></LibraryPath><TimeStamp>2021-8-31 12:13:50</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate></Description></Information>';
+    type 'Volume-Constant'
+     ports
+      hydraulic psi in p;
+     restrictions
+      causality preferred out p;
+    end;
+    icon ipm ellipse left
+     figures
+      line 168 104 168 120 color 0;
+      ellipse 152 72 184 104 color 0 fill 16777215;
+     terminals
+      p 168 120 fixed;
+    end;
+    implementation eq
+parameters
+	real global L {m}; 			// line length
+	real global D {m};			// line inner diameter
+	real global th {m};			// wall thickness
+	real global B {Pa};			// effective bulk modulus
+	real global E {N/m2};		// modulus of elasticity
+variables
+	real V0 {m3};					// half of the volume of oil under pressure at zero pressure
+	real Bp {Pa};					// bulk modulus of expanded pipe
+	real x;
+initialequations
+	V0 = (L/2) * D^2 * pi / 4;
+	Bp = (4*th*E*B)/(4*th*E + 5*D*B);
+	x = V0/Bp;
+equations
+	p.p = Bp/V0 * int(p.phi);
+	
+
+implementation_end;
+   Volume_right 528 96.5
+    description '<Information><Description><Version>4.9</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath></LibraryPath><TimeStamp>2021-8-31 12:13:50</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate></Description></Information>';
+    type 'Volume-Constant'
+     ports
+      hydraulic psi in p;
+     restrictions
+      causality preferred out p;
+    end;
+    icon ipm ellipse left
+     figures
+      line 528 104 528 120 color 0;
+      ellipse 512 72 544 104 color 0 fill 16777215;
+     terminals
+      p 528 120 fixed;
+    end;
+    implementation eq
+parameters
+	real global L {m}; 			// line length
+	real global D {m};			// line inner diameter
+	real global th {m};			// wall thickness
+	real global B {Pa};			// effective bulk modulus
+	real global E {N/m2};		// modulus of elasticity
+variables
+	real V0 {m3};					// half of the volume of oil under pressure at zero pressure
+	real Bp {Pa};					// bulk modulus of expanded pipe
+initialequations
+	V0 = (L/2) * D^2 * pi / 4;
+	Bp = (4*th*E*B)/(4*th*E + 5*D*B);
+equations
+	p.p = Bp/V0 * int(p.phi);
+
+implementation_end;
+  end;
+  connections
+   Friction\p_low => Node2\p;
+   HydraulicInertia\pb => Friction\p_high;
+   Node1\p => HydraulicInertia\pa;
+   Node2\p => p_out;
+   p_in => Node1\p;
+   Volume_left\p <= Node1\p;
+   Volume_right\p <= Node2\p;
+  end;
+ implementation_end;
+specification_end;
+				specification 'MultipleCells'
+description '<Information><Description><Version>4.9</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><AllowLibraryUpdate>True</AllowLibraryUpdate><ModelVersion><MajorVersion>2</MajorVersion><MinorVersion>0</MinorVersion><PatchVersion>0</PatchVersion></ModelVersion><Description>1.0.0 First version of the line model
+2.0.0.Model adapted to work with general fluid properties model</Description><Author>C. Kleijn</Author><Company>Controllab Products</Company><LibraryPath>Iconic Diagrams\Hydraulics\Components\Line.emx</LibraryPath><TimeStamp>2021-8-31 12:13:50</TimeStamp></Description><Attributes><GlobalRelations></GlobalRelations></Attributes></Information>';
+ type Line
+  ports
+   hydraulic psi in p_in;
+   hydraulic psi out p_out;
+  restrictions
+   causality preferred out p_in;
+   causality preferred out p_out;
+ end;
+ icon bg bottom
+  figures
+   rectangle 216 176 280 192 color -1 fill 14671839;
+   line 216 176 280 176 color 0 fill 14671839;
+   line 216 192 280 192 color 0 fill 14671839;
+  terminals
+   p_in 216 184 fixed;
+   p_out 280 184 fixed;
+ end;
+ implementation eq
+constants
+	integer n = 4;										// number of cells, n >= 2
+parameters
+	real L = 10.0 {m}; 								// line length
+	real D = 0.025 {m};								// line inner diameter
+	real th = 0.004 {m};							// wall thickness
+	real global rho {kg/m3};					// density
+	real global B {Pa};								// effective bulk modulus
+	real global kin_viscosity {m2/s};		// kinematic viscosity
+	real global p_vapour {Pa};					// vapour presure
+	real E = 2.1e11 {N/m2};						// modulus of elasticity
+variables
+	real hidden V0 {m3};							// volume of oil of one cell at zero pressure
+	real hidden vl;									// line fluid speed at port p_in
+	real hidden A;										// Line cross sectional area
+	real hidden Rl[n];								// Line friction
+	real hidden P_I[n] {Pa};
+	real hidden P_R[n] {Pa};
+	real hidden P_I_lim[n] {Pa};
+	real hidden P_R_lim[n] {Pa};
+	real hidden P_V[n] {Pa};
+	real hidden Q_V[n] {Pa};
+	real hidden Q_I[n] {m3/s};
+	real hidden Re[n];
+	real hidden I[n,n];
+	real hidden Bp[n,n];
+	real hidden BpV;
+	integer i;
+initialequations
+	V0 = (L/n) * D^2 * pi / 4;
+	A = pi*D^2/4;
+	I = eye(n)*(n*A)/(rho*L);
+	Bp = eye(n)*(4*th*E*B)/(4*th*E + 5*D*B);
+	BpV =(4*th*E*B)/(4*th*E + 5*D*B);
+equations
+	effortincausality(p_in) then
+		p_in.phi = ((V0/2)/BpV)*ddt(p_in.p) + Q_I[1];
+	else
+		p_in.p = BpV * int((p_in.phi-Q_I[1])/(V0/2));
+	end;
+	P_I[1] = p_in.p;
+	vl = p_in.phi/A;
+	
+	effortincausality(p_out) then
+		p_out.phi = Q_I[n] - ((V0/2)/BpV)*ddt(p_out.p);
+	else
+		p_out.p = BpV * int((Q_I[n] - p_out.phi)/(V0/2));
+	end;
+	
+	Q_I = I*int(P_I_lim - P_R_lim);
+	P_V = Bp * int(Q_V/V0);
+
+equations
+	
+	for i = 1 to n do
+			P_I_lim[i] = if P_I[i] < p_vapour then p_vapour else P_I[i] end;
+			P_R_lim[i] = if P_R[i] < p_vapour then p_vapour else P_R[i] end;		
+		end;
+
+code
+	for i = 1 to n-1 do
+			Q_V[i] = Q_I[i] - Q_I[i+1]; 
+		end;
+	Q_V[n] = 0;
+	
+	P_I[1] = p_in.p;
+	for i = 2 to n do
+			P_I[i] = P_V[i-1];		
+		end;
+		
+equations
+	Re = abs(Q_I) * (D / (A * kin_viscosity));	
+	for i = 1 to n do
+		Rl[i] = if Re[i] <= 1404 then
+				128 * (L/n) * rho * kin_viscosity / (pi * D^4)
+			else if Re[i] <= 2320
+				then
+					0.0456 * rho * (L/n) /(2 * D * A^2) * abs(Q_I[i])
+				else
+					(0.3164 / Re[i]^0.25) * rho * (L/n) /(2 * D * A^2) * abs(Q_I[i])
+				end
+			end;
+	end;
+code
+	for i = 1 to n-1 do
+		P_R[i] = Rl[i]*Q_I[i] + P_V[i];
+	end;
+	P_R[n] = Rl[n]*Q_I[n] + p_out.p;
+
+
+
+implementation_end;
+specification_end;
+			end;
+   ModulatedPressureSource 116 124.5
+    description ' <Information>
+
+   <Description>
+
+    <Version>4.9</Version>
+   <IsMainModel>
+1   </IsMainModel>
+
+     <KeepParameterValues>
+False   </KeepParameterValues>
+
+    <LibraryPath>Iconic Diagrams\20-sim Lib\Hydraulics\Pumps\Basic Pumps\PressureSource.emx</LibraryPath>
+  <TimeStamp>2021-9-1 15:50:41</TimeStamp>
+   <AllowLibraryUpdate>
+True   </AllowLibraryUpdate>
+
+     <ModelVersion>
+
+       <MajorVersion>
+2    </MajorVersion>
+
+       <MinorVersion>
+0    </MinorVersion>
+
+       <PatchVersion>
+0    </PatchVersion>
+
+    </ModelVersion>
+
+     <Description>
+Revision History
+1.0.0 first version, works with general fluid properties model
+2.0.0 parameter ranges added   </Description>
+
+     <Author>
+C. Kleijn   </Author>
+
+     <Company>
+Controllab Products B.V.   </Company>
+
+  </Description>
+
+</Information>
+';
+    type PressureSource
+     ports
+      hydraulic psi out p;
+     restrictions
+      causality fixed out p;
+    end;
+    icon ipm bottom
+     figures
+      line 88 136 88 120 152 120 color 0;
+      ellipse 104 104 136 136 color 0 fill 16777215;
+      line 80 136 80 144 96 144 96 136 color 0;
+      text 'p' 119 117.4 color 16711680 14;
+      line 134.8 119.3 126.8 115.2 126.8 123.2 134.8 119.3 color 0 fill 0;
+     terminals
+      p 152 120 fixed;
+    end;
+    implementation eq
+parameters
+	real p (range= <-1e5,>) = 10e5 {Pa};	// pressure
+equations
+	p.p = p;
+
+implementation_end;
+   Node1 359.9 215.9
+    description '<Description><Version>4.0</Version>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Node.emx</LibraryPath>
+  <TimeStamp>2007-10-31 11:27:14</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+    knot Node
+     ports
+      electric knot psi duplicatable none p [1];
+    end;
+    icon bg ellipse
+     figures
+      ellipse 356.8 212.8 363.2 219.2 color -1 fill 0;
+      ellipse 355.7 211.7 364.2 220.2 color -1;
+     terminals
+      p 360 216 fixed;
+      p 360 216 fixed;
+      p 360 216 fixed;
+      p 360 216 fixed;
+    end;
+    implementation eq
+equations
+	sum (direct (p.t)) = 0;
+	equal (collect (p.a));
+  implementation_end;
+   Node2 159.9 215.9
+    description '<Description><Version>4.0</Version>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Node.emx</LibraryPath>
+  <TimeStamp>2007-10-31 11:27:14</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+    knot Node
+     ports
+      electric knot psi duplicatable none p [1];
+    end;
+    icon bg ellipse
+     figures
+      ellipse 156.8 212.8 163.2 219.2 color -1 fill 0;
+      ellipse 155.7 211.7 164.2 220.2 color -1;
+     terminals
+      p 160 216 fixed;
+      p 160 216 fixed;
+      p 160 216 fixed;
+      p 160 216 fixed;
+    end;
+    implementation eq
+equations
+	sum (direct (p.t)) = 0;
+	equal (collect (p.a));
+  implementation_end;
+   Resistor 216 216
+    description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Electric\Components\Resistor.emx</LibraryPath>
+  <TimeStamp>2007-9-25 11:58:20</TimeStamp>
+</Description>';
+    type Resistor
+     ports
+      electric delta in p;
+    end;
+    icon ipm bottom
+     figures
+      line 192 216 240 216 color 0;
+      rectangle 200 208 232 224 color 0 fill 16777215;
+     terminals
+      p high 192 216 fixed;
+      p low 240 216 fixed;
+    end;
+    implementation eq
+parameters
+	real L = 10; 				// line length
+	real D = 25e-3;				// line inner diameter
+	real global rho;	// density
+	real global kin_viscosity;	// kinematic viscosity
+variables
+	real A;						// line cross sectional area
+	real Re {ohm};								// Reynolds number
+	real Rl {ohm};								// line resistance
+	real vl;						// average flow velocity
+initialequations
+	A = 0.25 * pi * D^2;
+equations
+	vl = p.i/A;
+	Re = (abs(p.i) * D) / (A * kin_viscosity);
+	Rl = if Re <= 1404 then
+			128 * L * rho * kin_viscosity / (pi * D^4)
+		else if Re <= 2320
+			then
+				0.0456 * rho * L /(2 * D * A^2) * abs(p.i)
+			else
+				(0.3164 / Re^0.25) * rho * L /(2 * D * A^2) * abs(p.i)
+			end
+		end;
+	p.u = Rl*p.i;implementation_end;
+   Tank 344 136
+    description '<Information>
+  <Description>
+    <IsMainModel>1</IsMainModel>
+    <KeepParameterValues>False</KeepParameterValues>
+    <AllowLibraryUpdate>True</AllowLibraryUpdate>
+    <ModelVersion>
+      <MajorVersion>2</MajorVersion>
+      <MinorVersion>0</MinorVersion>
+      <PatchVersion>0</PatchVersion>
+    </ModelVersion>
+    <Description>1.0.0: First version, also works with general fluid properties model
+2.0.0: p_preload renamced to p_tank, range added
+          renamed from TankNoRes to Tank</Description>
+    <Author>C. Klejin</Author>
+    <Company>Controllab Products B.V.</Company>
+    <LibraryPath>Iconic Diagrams\Hydraulics\Volumes\Tank.emx</LibraryPath>
+    <TimeStamp>2021-12-15 10:44:46</TimeStamp>
+    <Version>4.9</Version>
+  </Description>
+</Information>';
+    type Tank
+     ports
+      hydraulic psi in p;
+     restrictions
+      causality fixed out p;
+    end;
+    icon ipm bottom
+     figures
+      line 336 144 336 152 352 152 352 144 color 0;
+      line 344 144 344 120 color 0;
+     terminals
+      p 344 120 fixed;
+    end;
+    implementation eq
+parameters
+	real p_tank (range= [0,>)= 0.0 {Pa};	// tank pressure
+equations
+	p.p = p_tank;implementation_end;
+   VoltageSource 79.9 264
+			specifications active 'DC'
+				specification 'AC'
+description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+	   <LibraryPath>Iconic Diagrams\Electric\Sources\VoltageSource.emx</LibraryPath>
+	  <TimeStamp>2008-1-24 10:10:10</TimeStamp>
+</Description>';
+ type VoltageSource
+  ports
+   electric delta out p;
+  restrictions
+   causality fixed out p;
+ end;
+ icon bg bottom
+  figures
+   group
+    line 192 147 192 155;
+    line 188 151 196 151;
+   end;
+   line 200 144 200 192;
+   ellipse 188.9 157.3 211.3 179.7 fill 16777215;
+   spline 192.1 167.8 197.4 162.2 202.7 173.2 207.9 167.8;
+  terminals
+   p high 200 144 fixed;
+   p low 200 192 fixed;
+ end;
+ implementation eq
+parameters
+	real U = 220 {V};		// voltage
+	real f = 50 {Hz};			// frequency
+variables
+	real hidden current {A};
+equations
+	p.u = U * sin ( 2 * pi * f * time );
+   	current = p.i;implementation_end;
+specification_end;
+				specification 'DC'
+ description '<Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Iconic Diagrams\Electric\Sources\VoltageSource.emx</LibraryPath>
+  <TimeStamp>2008-1-24 10:10:10</TimeStamp>
+</Description>';
+ type VoltageSource
+  ports
+   electric delta out p;
+  restrictions
+   causality fixed out p;
+ end;
+ icon bg bottom
+  figures
+   line 80 240 80 288 color 0;
+   ellipse 69.3 253.3 91.7 275.7 color 0 fill 16777215;
+   line 69.2 246.4 76.7 246.4 color 0;
+   line 72.4 243.2 72.4 250.7 color 0;
+  terminals
+   p high 80 240 fixed;
+   p low 80 288 fixed;
+ end;
+ implementation eq
+parameters
+	real U (range= <-1e5,>) = 10e5 {V};		// voltage
+variables
+	real hidden current {A};
+equations
+	p.u = U;
+	current = p.i;             implementation_end;
+specification_end;
+			end;
+  end;
+  connections
+   Capacitor\p_high <= Node2\p;
+   Capacitor1\p_high <= Node1\p;
+   Capacitor1\p_low => Ground1\p;
+   Ground\p => VoltageSource\p_low;
+   Ground3\p <= Capacitor\p_low;
+   Inductor\p_low => Node1\p;
+   ModulatedPressureSource\p => Line1\p_in;
+   Node1\p => Ground2\p 424 216;
+   Node2\p => Resistor\p_high;
+   Resistor\p_low => Inductor\p_high;
+   Tank\p <= Line1\p_out;
+   VoltageSource\p_high => Node2\p 80 224 80 216;
+  end;
+  figures
+   text 'Top: Default parameters for a DC pressure source and the "line" component which models a pipe.
+Bottom: The equivalent electrical circuit where the parameters for the capacitor, resistor and inductor are taken from the hydraulic domain.
+NOTE: The electrical resistor has been changed significantly to match the hydraulic model of friction. (Takes laminar/turbolent flow into account). So the resistor value varies quite a bit with the flow.' 576 400 color 0 16;
+ implementation_end;
+]]></Sidops>
+ </Model>
+ <Experiments>
+  <DefaultExperiment><![CDATA[Experiment 1]]></DefaultExperiment>
+<Experiment>
+   <Name>Experiment 1</Name>
+   <CreatedBy></CreatedBy>
+   <Info></Info>
+<ExpData>
+ <VersionNumber>5.0</VersionNumber>
+ <ModelProperties>
+ </ModelProperties>
+ <Variables>
+  <Constants>
+  </Constants>
+  <Parameters>
+  </Parameters>
+  <Initials>
+   <Variable>
+    <Name>Inductor\p.u_int_initial</Name>
+    <Value>0.0</Value>
+   </Variable>
+   <Variable>
+    <Name>Line1\HydraulicInertia\dp_int_initial</Name>
+    <Value>0.0</Value>
+   </Variable>
+  </Initials>
+ </Variables>
+ <PlotSpecs>
+  <VarNames>
+   <VarName>time</VarName>
+   <VarName>ModulatedPressureSource\p.phi</VarName>
+   <VarName>Resistor\p.i</VarName>
+  </VarNames>
+  <Plots>
+   <Plot>
+    <PlotType>GraphPlot</PlotType>
+    <BasePlot>
+     <PlotId>1</PlotId>
+     <UseWindowsBGColor>false</UseWindowsBGColor>
+     <BGColor>16777215</BGColor>
+     <PlotIsVisible>true</PlotIsVisible>
+     <Solo>false</Solo>
+    </BasePlot>
+    <Grid>
+     <DrawGrid>true</DrawGrid>
+     <GridColor>15780518</GridColor>
+     <GridBorderLineColor>12624260</GridBorderLineColor>
+     <GridZeroLineColor>0</GridZeroLineColor>
+     <XTicks>10</XTicks>
+     <YTicks>10</YTicks>
+     <ZTicks>10</ZTicks>
+     <Use3DLook>false</Use3DLook>
+    </Grid>
+    <PlotBGColor>16777215</PlotBGColor>
+    <ShowPlotTitle>true</ShowPlotTitle>
+    <TitlePosition>1</TitlePosition>
+    <PlotTitle>model</PlotTitle>
+    <ShowXValues>true</ShowXValues>
+    <Fonts>
+     <TitleFont>
+      <Name>Arial</Name>
+      <Height>12</Height>
+      <PitchFamily>34</PitchFamily>
+      <Weight>400</Weight>
+      <Italic>0</Italic>
+      <UnderLine>0</UnderLine>
+      <StrikeOut>0</StrikeOut>
+      <Color>0</Color>
+     </TitleFont>
+     <LabelFont>
+      <Name>Arial</Name>
+      <Height>12</Height>
+      <PitchFamily>34</PitchFamily>
+      <Weight>400</Weight>
+      <Italic>0</Italic>
+      <UnderLine>0</UnderLine>
+      <StrikeOut>0</StrikeOut>
+      <Color>0</Color>
+     </LabelFont>
+     <ValuesFont>
+      <Name>Arial</Name>
+      <Height>10</Height>
+      <PitchFamily>34</PitchFamily>
+      <Weight>400</Weight>
+      <Italic>0</Italic>
+      <UnderLine>0</UnderLine>
+      <StrikeOut>0</StrikeOut>
+      <Color>0</Color>
+     </ValuesFont>
+     <LegendFont>
+      <Name>Arial</Name>
+      <Height>12</Height>
+      <PitchFamily>34</PitchFamily>
+      <Weight>400</Weight>
+      <Italic>0</Italic>
+      <UnderLine>0</UnderLine>
+      <StrikeOut>0</StrikeOut>
+      <Color>0</Color>
+     </LegendFont>
+    </Fonts>
+    <SharedXAxis>true</SharedXAxis>
+    <SharedYAxis>true</SharedYAxis>
+    <SharedZAxis>false</SharedZAxis>
+    <XAxes>
+     <Axis>
+      <Minimum>0.0</Minimum>
+      <Maximum>10.0</Maximum>
+      <Linear>true</Linear>
+      <Scaling>3</Scaling>
+      <Label>time</Label>
+     </Axis>
+    </XAxes>
+    <YAxes>
+     <Axis>
+      <Minimum>-0.004</Minimum>
+      <Maximum>0.016</Maximum>
+      <Linear>true</Linear>
+      <Scaling>2</Scaling>
+      <Label>p.phi</Label>
+     </Axis>
+     <Axis>
+      <Minimum>-0.004</Minimum>
+      <Maximum>0.016</Maximum>
+      <Linear>true</Linear>
+      <Scaling>2</Scaling>
+      <Label>p.i</Label>
+     </Axis>
+    </YAxes>
+    <ZAxes>
+    </ZAxes>
+    <Curves>
+     <Curve>
+      <LineColor>3355111</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>3355111</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>true</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>ModulatedPressureSource\p.phi</VarName>
+      </YCurveData>
+     </Curve>
+     <Curve>
+      <LineColor>6076255</LineColor>
+      <LineStyle>1</LineStyle>
+      <TickColor>6076255</TickColor>
+      <TickStyle>0</TickStyle>
+      <CurveVisible>true</CurveVisible>
+      <PixelThresshold>1</PixelThresshold>
+      <LineThickness>2</LineThickness>
+      <LineOrder>1</LineOrder>
+      <ShowYValues>true</ShowYValues>
+      <XCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>time</VarName>
+      </XCurveData>
+      <YCurveData>
+       <ShowUnit>true</ShowUnit>
+       <VarName>Resistor\p.i</VarName>
+      </YCurveData>
+     </Curve>
+    </Curves>
+    <Legenda>
+     <ShowLegenda>true</ShowLegenda>
+     <BorderPenColor>0</BorderPenColor>
+     <BackgroundColor>16777215</BackgroundColor>
+    </Legenda>
+   </Plot>
+  </Plots>
+  <PlotPanels>
+   <PlotPanel>
+    <PlotPanelId>1</PlotPanelId>
+    <PlotPanelVisible>true</PlotPanelVisible>
+    <Name>Window 1</Name>
+    <Tiling>0</Tiling>
+    <PlotIds>
+     <PlotId>1</PlotId>
+    </PlotIds>
+    <ToggleState>Base</ToggleState>
+   </PlotPanel>
+  </PlotPanels>
+  <WindowRectangles virtualDesktopWidth="1918" virtualDesktopHeight="1016">
+   <WindowRectangle monitor="0" left="0" top="0" right="1918" bottom="1016" plotpanelid="1">
+-0.00208551 -0.00393701 1.00209 0.956693
+   </WindowRectangle>
+  </WindowRectangles>
+ </PlotSpecs>
+ <RunSpecs>
+  <SimulatorSettings>
+   <StartTime>0.0</StartTime>
+   <FinishTime>10.0</FinishTime>
+   <AllowPassFinishTime>false</AllowPassFinishTime>
+   <Warp>false</Warp>
+   <SimulationMode>0</SimulationMode>
+   <FPGonio>false</FPGonio>
+   <UseOutputAfterEach>false</UseOutputAfterEach>
+   <OutputAfterEach>0.1</OutputAfterEach>
+   <EventEpsilon>1.0e-6</EventEpsilon>
+   <AlgebraicTolerance>1.0e-7</AlgebraicTolerance>
+   <SteadyStateAnalysis>false</SteadyStateAnalysis>
+   <UpdateHoldInstructions>true</UpdateHoldInstructions>
+  </SimulatorSettings>
+  <IntegrationMethods>
+   <IntegrationMethod>
+    <Name>Euler</Name>
+    <StepSize>0.01</StepSize>
+    <AutoStepSize>false</AutoStepSize>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>BackwardEuler</Name>
+    <AbsoluteTolerance>1.0e-5</AbsoluteTolerance>
+    <RelativeTolerance>1.0e-5</RelativeTolerance>
+    <AlgebraicAbsoluteTolerance>1.0e-5</AlgebraicAbsoluteTolerance>
+    <AlgebraicRelativeTolerance>1.0e-5</AlgebraicRelativeTolerance>
+    <StepSize>0.01</StepSize>
+    <Alpha>1.0</Alpha>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>AdamsBashforth</Name>
+    <StepSize>0.01</StepSize>
+    <AutoStepSize>false</AutoStepSize>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>RungeKutta2</Name>
+    <StepSize>0.01</StepSize>
+    <AutoStepSize>false</AutoStepSize>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>RungeKutta4</Name>
+    <StepSize>0.01</StepSize>
+    <AutoStepSize>false</AutoStepSize>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>RungeKutta8</Name>
+    <UseInitialStepSize>false</UseInitialStepSize>
+    <InitialStepSize>0.001</InitialStepSize>
+    <UseMaximumStepSize>false</UseMaximumStepSize>
+    <MaximumStepSize>1.0</MaximumStepSize>
+    <AbsoluteTolerance>1.0e-6</AbsoluteTolerance>
+    <RelativeTolerance>1.0e-6</RelativeTolerance>
+    <SafetyFactor>0.9</SafetyFactor>
+    <Factor1>0.33</Factor1>
+    <Factor2>6.0</Factor2>
+    <Beta>0.0</Beta>
+    <UseMaxNrSteps>false</UseMaxNrSteps>
+    <MaxNrSteps>100000</MaxNrSteps>
+    <UseStiffDetection>false</UseStiffDetection>
+    <MaxNrStiffnessSteps>1000</MaxNrStiffnessSteps>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>RungeKuttaFehlberg</Name>
+    <UseInitialStepSize>false</UseInitialStepSize>
+    <InitialStepSize>0.001</InitialStepSize>
+    <UseMaximumStepSize>false</UseMaximumStepSize>
+    <MaximumStepSize>1.0</MaximumStepSize>
+    <AbsoluteTolerance>1.0e-6</AbsoluteTolerance>
+    <RelativeTolerance>1.0e-6</RelativeTolerance>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>VodeAdams</Name>
+    <UseInitialStepSize>false</UseInitialStepSize>
+    <InitialStepSize>0.001</InitialStepSize>
+    <UseMaximumStepSize>false</UseMaximumStepSize>
+    <MaximumStepSize>1.0</MaximumStepSize>
+    <AbsoluteTolerance>1.0e-6</AbsoluteTolerance>
+    <RelativeTolerance>1.0e-6</RelativeTolerance>
+    <VodeUseBDF>true</VodeUseBDF>
+    <VodeUseNewton>true</VodeUseNewton>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>BDFMethod</Name>
+    <AbsoluteTolerance>1.0e-5</AbsoluteTolerance>
+    <RelativeTolerance>1.0e-5</RelativeTolerance>
+    <AlgebraicAbsoluteTolerance>1.0e-5</AlgebraicAbsoluteTolerance>
+    <AlgebraicRelativeTolerance>1.0e-5</AlgebraicRelativeTolerance>
+    <UseInitialStepSize>false</UseInitialStepSize>
+    <InitialStepSize>0.001</InitialStepSize>
+    <UseMaximumStepSize>false</UseMaximumStepSize>
+    <MaximumStepSize>1.0</MaximumStepSize>
+   </IntegrationMethod>
+   <IntegrationMethod>
+    <Name>MeBDFiMethod</Name>
+    <AbsoluteTolerance>1.0e-5</AbsoluteTolerance>
+    <RelativeTolerance>1.0e-5</RelativeTolerance>
+    <AlgebraicAbsoluteTolerance>1.0e-5</AlgebraicAbsoluteTolerance>
+    <AlgebraicRelativeTolerance>1.0e-5</AlgebraicRelativeTolerance>
+    <UseInitialStepSize>false</UseInitialStepSize>
+    <InitialStepSize>0.001</InitialStepSize>
+    <UseMaximumStepSize>false</UseMaximumStepSize>
+    <MaximumStepSize>1.0</MaximumStepSize>
+   </IntegrationMethod>
+   <SelectedIntegrationMethod>8</SelectedIntegrationMethod>
+  </IntegrationMethods>
+ </RunSpecs>
+ <MultipleRun>
+  <NrSteps>10</NrSteps>
+  <CopyFromStates>false</CopyFromStates>
+  <JoinParameterVariation>true</JoinParameterVariation>
+  <ClearAfterRun>true</ClearAfterRun>
+  <RedrawAfterRun>false</RedrawAfterRun>
+  <DrawDuringSimulation>true</DrawDuringSimulation>
+  <ActionBeforeOptimization>0</ActionBeforeOptimization>
+  <CompareValue>0.0</CompareValue>
+  <UseCompareValue>true</UseCompareValue>
+  <MultipleRunType>MultipleRun</MultipleRunType>
+  <Minimize>true</Minimize>
+  <OptimizationVariable></OptimizationVariable>
+  <ResulVarUsage>UseEndValue</ResulVarUsage>
+  <Tolerance>0.001</Tolerance>
+  <OptimizationMethod>BroydonFletcherGoldfarbShanno</OptimizationMethod>
+  <MultipleRunVariables>
+  </MultipleRunVariables>
+ </MultipleRun>
+ <ExportData>
+  <WriteAsText>true</WriteAsText>
+  <ReadAsText>true</ReadAsText>
+  <WriteHeader>true</WriteHeader>
+  <ReadHeader>true</ReadHeader>
+  <ReadFilename></ReadFilename>
+  <WriteFilename></WriteFilename>
+  <DoWrite>false</DoWrite>
+  <ExportVariables>
+   <ExportVariable>
+    <VariableName>time</VariableName>
+   </ExportVariable>
+  </ExportVariables>
+  <ImportVariables>
+  </ImportVariables>
+ </ExportData>
+ <BreakPoints>
+ </BreakPoints>
+ <AnimationPlayback>
+  <PlaybackSpeed>1.0</PlaybackSpeed>
+ </AnimationPlayback>
+</ExpData>
+  </Experiment>
+</Experiments>
+</Document>

@@ -23,3 +23,13 @@ Before 18.09: Intro days
 02.11: Return of the Mikkel
 - Mikkel goes back to Grundfos to make new measurements
 - The pump is having similar tendencies to 25.10 measurements but not as bad.
+
+14.11: Final Destination
+- We are told that it is an error with the newest version of SCALA2 pump.
+- Cannot be fixed within our project duration
+- We agree that we will try to use it in the current state
+
+16.11: Epic fail
+- We arrive at Grundfos and the pump is leaking water everywhere.
+- The setup is not operatable at all. We need a new pump which will take a couple of days.
+- Ended up going home without measuring anything...
